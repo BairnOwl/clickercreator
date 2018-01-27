@@ -7,33 +7,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 
     <title>Clicker Creator: Make your own clicker game!</title>
-    <style>
-      div { 
-        border: 1px solid black; 
-      }
-
-      fieldset . {
-
-      }
-
-      input.title { 
-        font-size: 1.5em; 
-      }
-
-      .pointer {
-        cursor: pointer;
-      }
-
-      #main-click-img {
-        width: 100%;
-      }
-    </style>
   </head>
   <body>
 
-<form class="container-fluid" method="post" action="#" id="gameForm">
+<form class="container-fluid" method="post" action="/" id="gameForm">
 
   <!-- Header -->
   <div class="row" id="header">
@@ -47,20 +27,20 @@
   	<!-- Click Station -->
     <div class="col-lg-4 col-md-6 col-12">
       <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
-      <input name="game[defaultImage]" />
-      <span class="game[num-clicks]">#</span> 
-      <input name="game[clickName]" type="text" value="clicks"/><br/>
-      <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
-      <input name="game[storeName]" type="text" value="clicks"/><br/>
+      <img src="defaultclick.png" class="pointer">
+      <input name="game[defaultImage]" type="file" /><br>
+      <span class="num-clicks">#</span> of <input name="game[clickName]" type="text" value="clicks"/><br/>
+      <!--
       <input name="game[clickOverride]" type="checkbox" value="clicks"/><br/>
       <input name="game[overrideIcon]" type="checkbox" value="clicks"/><br/>
       <input name="game[clickSFX]" type="checkbox" value="clicks"/><br/>
-      <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
+       <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> 
+     -->
     </div>
 
     <!-- Achievements / Progress -->
     <div class="col-lg-4 col-md-6 col-12">
-      <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
+      <input name="game[achievementTitle]" class="title" type="text" value="Achievements"/><br/>
       <div id="achievements">
       <!-- an individual achievement -->
       <fieldset class="achievement" id="base-achievement">
@@ -78,7 +58,7 @@
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
-      <input name="storeTitle" class="title" type="text" value="Store Name"/><br/>
+      <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
       <!-- a single item in a store -->
       <div id="store-items">
       <fieldset class="store-item" id="base-store-item">
