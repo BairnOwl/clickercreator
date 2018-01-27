@@ -67,9 +67,17 @@ app.get('*', function(request, response) {
 */
 
 
-app.post('', function(req, res) {
+app.post('/', function(req, res) {
+
 	// Game section
-	var gameTitle = request.body['game']['gameTitle'];
+	var gameTitle = req.body['game']['gameTitle'];
+	var defaultImage = req.body['game']['defaultImage'];
+	var clickName = req.body['game']['clickName'];
+	var achievementsTitle = req.body['game']['achievementsTitle'];
+	var storeName = req.body['game']['storeName'];
+	var clickOverride = req.body['game']['clickOverride'];
+	var overrideIcon = req.body['game']['overrideIcon'];
+	var clickSFX = req.body['game']['clickSFX'];
 
 
 	// write sql query here
