@@ -34,8 +34,9 @@ app.get('*', function(request, response) {
     var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
     achievementID = conn.query(sql, function(err, res) {
         achievementID = res.rows[0]['numAchievement'];
-    });; 
-
+    }); 
+    console.log("ACHIEVEMENTS ID:");
+    console.log(achievementID);
 
     var sql = 'SELECT count(itemID) as numStore FROM Store';
     itemID = conn.query(sql, function(err, res) {
@@ -289,7 +290,7 @@ app.post('/createGame', function(req, res) {
 		}
 
      	var title = titleList;
-     	var cost = costList;
+     	var cost = parseInt(costList);
      	var description = descriptionList;
      	
      	var costMultiplier = 0;
@@ -306,8 +307,8 @@ app.post('/createGame', function(req, res) {
 			passiveClicks = parseInt(passiveClicksList);
 		}
      	
-     	var passiveSecs = passiveSecsList;
-     	var manualClickMultiplier = manualClickMultiplierList;
+     	var passiveSecs = parseInt(passiveSecsList);
+     	var manualClickMultiplier = parseInt(manualClickMultiplierList);
      	
      	var autoClick = 0;
     	if (typeof autoClickList == 'undefined') {
@@ -326,16 +327,16 @@ app.post('/createGame', function(req, res) {
      sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
          + gameID + '\', \'' 
          + storeimage + '\', \'' 
-         + title + '\', ' 
-         + cost + '\', ' 
-         + description + '\', ' 
-         + costMultiplier + '\', ' 
-         + passiveClicks + '\', ' 
-         + passiveSecs + '\', '
-         + manualClickMultiplier + '\', '
-         + autoClick + '\', '
-         + itemID + '\', '
-         +  manualClick + ')';
+         + title + '\', \''  
+         + cost + '\', \''  
+         + description + '\', \''  
+         + costMultiplier + '\', \''  
+         + passiveClicks + '\', \''  
+         + passiveSecs + '\', \'' 
+         + manualClickMultiplier + '\', \'' 
+         + autoClick + '\', \'' 
+         + itemID + '\', \'' 
+         +  manualClick + '\')';
  
      	console.log(sql);
      	q = conn.query(sql);
@@ -344,7 +345,7 @@ app.post('/createGame', function(req, res) {
 	} else {
 		lengthStore = titleList.length;
 
-		 	for(var count = 0; count < lengthStore; count++) {
+		for(var count = 0; count < lengthStore; count++) {
  
      	var storeimage = "";
      	if (typeof storeimageList == 'undefined') {
@@ -354,7 +355,7 @@ app.post('/createGame', function(req, res) {
 		}
 
      	var title = titleList[count];
-     	var cost = costList[count];
+     	var cost = parseInt(costList[count]);
      	var description = descriptionList[count];
 
         var costMultiplier = 0;
@@ -372,8 +373,8 @@ app.post('/createGame', function(req, res) {
 		}
      	
 
-     	var passiveSecs = passiveSecsList[count];
-     	var manualClickMultiplier = manualClickMultiplierList[count];
+     	var passiveSecs = parseInt(passiveSecsList[count]);
+     	var manualClickMultiplier = parseInt(manualClickMultiplierList[count]);
      	
     	var autoClick = 0;
     	if (typeof autoClickList == 'undefined') {
