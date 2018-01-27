@@ -281,16 +281,47 @@ app.post('/createGame', function(req, res) {
 
 	var lengthStore = 0;
 	if(typeof titleList === "string") {
-		var storeimage = storeimageList;
+		var storeimage = "";
+     	if (typeof storeimageList == 'undefined') {
+			storeimage = "";
+		} else {
+			storeimage = storeimageList;
+		}
+
      	var title = titleList;
      	var cost = costList;
      	var description = descriptionList;
-     	var costMultiplier = costMultiplier;
-     	var passiveClicks = passiveClicks;
-     	var passiveSecs = passiveSecs;
+     	
+     	var costMultiplier = 0;
+    	if (typeof costMultiplierList == 'undefined') {
+			costMultiplier = 0;
+		} else {
+			costMultiplier = parseInt(costMultiplierList);
+		}
+     	
+     	var passiveClicks = 0;
+    	if (typeof passiveClicksList == 'undefined') {
+			passiveClicks = 0;
+		} else {
+			passiveClicks = parseInt(passiveClicksList);
+		}
+     	
+     	var passiveSecs = passiveSecsList;
      	var manualClickMultiplier = manualClickMultiplierList;
-     	var autoClick = autoClickList;
-     	var manualClick = manualClickList;
+     	
+     	var autoClick = 0;
+    	if (typeof autoClickList == 'undefined') {
+			autoClick = 0;
+		} else {
+			autoClick = parseInt(autoClickList);
+		}
+
+     	var manualClick = 0;
+    	if (typeof manualClickList == 'undefined') {
+			manualClick = 0;
+		} else {
+			manualClick = parseInt(manualClickList);
+		}
  
      sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
          + gameID + '\', \'' 
@@ -306,23 +337,57 @@ app.post('/createGame', function(req, res) {
          + itemID + '\', '
          +  manualClick + ')';
  
+     	console.log(sql);
      	q = conn.query(sql);
  		itemID = itemID + 1;
+
 	} else {
 		lengthStore = titleList.length;
 
 		 	for(var count = 0; count < lengthStore; count++) {
  
-     	var storeimage = storeimageList[count];
+     	var storeimage = "";
+     	if (typeof storeimageList == 'undefined') {
+			storeimage = "";
+		} else {
+			storeimage = storeimageList[count];
+		}
+
      	var title = titleList[count];
      	var cost = costList[count];
      	var description = descriptionList[count];
-     	var costMultiplier = costMultiplier[count];
-     	var passiveClicks = passiveClicks[count];
-     	var passiveSecs = passiveSecs[count];
+
+        var costMultiplier = 0;
+    	if (typeof costMultiplierList == 'undefined') {
+			costMultiplier = 0;
+		} else {
+			costMultiplier = parseInt(costMultiplierList[count]);
+		}
+     	
+     	var passiveClicks = 0;
+    	if (typeof passiveClicksList == 'undefined') {
+			passiveClicks = 0;
+		} else {
+			passiveClicks = parseInt(passiveClicksList[count]);
+		}
+     	
+
+     	var passiveSecs = passiveSecsList[count];
      	var manualClickMultiplier = manualClickMultiplierList[count];
-     	var autoClick = autoClickList[count];
-     	var manualClick = manualClickList[count];
+     	
+    	var autoClick = 0;
+    	if (typeof autoClickList == 'undefined') {
+			autoClick = 0;
+		} else {
+			autoClick = parseInt(autoClickList[count]);
+		}
+
+     	var manualClick = 0;
+    	if (typeof manualClickList == 'undefined') {
+			manualClick = 0;
+		} else {
+			manualClick = parseInt(manualClickList[count]);
+		}
  
      sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
          + gameID + '\', \'' 
