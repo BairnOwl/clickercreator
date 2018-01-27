@@ -53,9 +53,9 @@
     <!-- Achievements / Progress -->
     <div class="col-lg-4 col-md-6 col-12">
       <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
-
+      <div id="achievements">
       <!-- an individual achievement -->
-      <fieldset class="achievement">
+      <fieldset class="achievement" id="base-achievement">
         <input name="achievement-icon" type="file"><br/>
         <input name="achievement-name" type="text" placeholder="Achievement Name"><br/>
         <input name="achievement-message" type="text" placeholder="Unlock Message"><br/>
@@ -63,7 +63,9 @@
         <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
         <input name="achievement-bigclick-img" type="file"><br/>
       </fieldset> 
-      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
+    </div>
+
+      <input type="button" value="Add New Achievement" onclick="cloneElement('base-achievement','achievements');">
     </div>
 
     <!-- Store -->
@@ -74,7 +76,7 @@
       <fieldset class="store-item" id="base-store-item">
         <input name="store-item-icon" type="file"><br/>
         <input name="store-item-name" type="text" placeholder="Item Name"><br/>
-        <input name="store-description" type="text" placeholder=Item Description"><br/>
+        <input name="store-description" type="text" placeholder="Item Description"><br/>
         <input name="store-item-clicks" type="number" placeholder="10">Cost (in clicks)<br/>
         <input name="store-item-passive" type="checkbox"> Auto Click <input name="-store-item-autoclick" type="number" value="10"> times every <input name="-store-item-autoclickseconds-1" type="number" value="5"> seconds <br/> 
         <input name="store-item-click-multipier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
@@ -100,6 +102,7 @@
         var cln = elmnt.cloneNode(true);
          document.getElementById(appendTo).appendChild(cln);
       }
+
     </script>
   </body>
 </html>
