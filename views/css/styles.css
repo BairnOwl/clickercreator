@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Gorditas');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+body {
+  background: url("../bg.png");
+  background-size: cover;
+  background-repeat: none;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .title {
+  font-family: 'Gorditas', cursive;
+  text-align: center;
+  padding: 10px 0px;
+  color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,.2)
+}
+
+input {
+  border: 1px dashed gray;
+  max-width: 100%;
+}
+
+.title {
+  font-size: 1.75em;
+  text-align: center;
+  background-color: rgba(0,0,0,.2);
+  background-size: auto 100%;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+#big-clicker-container {
+
+  background-size: 100% 100%;
+  text-align: center;
+  padding-bottom: 1.7em;
+}
+
+#big-image {
+  padding: 50px;
+  margin: auto;
+  transform-origin: center;
+  width: 100%;
+  transition: .115s all linear;
+  transform: scale(1);
+}
+
+#big-image.transform-active {
+  transform: scale(.9);
+}
+
+@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(1); opacity: 1; }
+    50% { -webkit-transform: scale(1.075); opacity: .95; }
+    100% { -webkit-transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.075); opacity: .95; }
+    100% { transform: scale(1); opacity: 1; }
+}

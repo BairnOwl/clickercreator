@@ -5,6 +5,10 @@ var server = http.createServer(app);
 var anyDB = require('any-db');
 var conn = anyDB.createConnection('sqlite3://database.db');
 
+var path = require('path');
+var fs = require('fs');
+var multer = require('multer'); 
+
 var engine = require('consolidate');
 
 app.engine('html', engine.hogan); // tell Express to run .html files through Hogan
@@ -13,11 +17,24 @@ app.use(express.static('public'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+app.use(bodyParser({uploadDir:'/images'}));
 
 app.use(express.static(__dirname + '/views'));
 app.engine('html', engine.mustache);
 app.set('view engine', 'html');
+
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./Images");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+
+var upload = multer({ storage: Storage }).array("imgUploader", 3); 
 
 var gameID = 0;
 var achievementID = 0;
@@ -123,6 +140,14 @@ app.post('/createGame', function(req, res) {
 	console.log(clickOverride);
 	console.log(overrideIcon);
 	console.log(clickSFX);
+
+	upload(defaultImage, res, function (err) { 
+        if (err) { 
+            console.log("Something went wrong!"); 
+        } 
+        console.log('successfully uploaded file');
+        // return res.end("File uploaded sucessfully!."); 
+    }); 
 
 
 	gameID = gameID + 1;
