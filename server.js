@@ -67,7 +67,7 @@ app.get('*', function(request, response) {
 */
 
 
-app.post('/', function(req, res) {
+app.post('/createGame', function(req, res) {
 
 	// Game section
 	var gameTitle = req.body['game']['gameTitle'];
