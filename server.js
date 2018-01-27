@@ -47,11 +47,18 @@ app.get('*', function(request, response) {
         gameID = res.rows[0]['numGames'];
     });; 
 
-    var sql = 'SELECT count(achievementID) FROM Achievements';
-    achievementID = conn.query(sql); 
 
-    var sql = 'SELECT count(itemID) FROM Store';
-    itemID = conn.query(sql); 
+    var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
+    achievementID = conn.query(sql, function(err, res) {
+        achievementID = res.rows[0]['numAchievement'];
+    });; 
+
+
+    var sql = 'SELECT count(itemID) as numStore FROM Store';
+    itemID = conn.query(sql, function(err, res) {
+        itemID = res.rows[0]['numStore'];
+    });; 
+
 });
 
 /* 
@@ -162,68 +169,271 @@ app.post('/createGame', function(req, res) {
 
 
     // ACHIEVEMENTS
-    
- //    var listAchievements = req.body['achievements'][0];
- //    achievementID = achievementID + 1;
+    achievementID = achievementID + 1;
+    var nameList = req.body['name'];
+	var achievementImageList = req.body['achievementimage'];
+	var clicksToUnlockList = req.body['clicksToUnlock'];
+	var changesBigImageList = req.body['changesBigImage'];
+	var newBigImageList = req.body['newBigImage'];
+	var messageList = req.body['message'];
 
- //    for(var achievement of listAchievements) {
+	var length = 0;
+	if(typeof nameList === "string") {
+		
+		var name = nameList;
 
- //    	var name = achievement['name'];
- //    	var image = achievement['image'];
- //    	var clicksToUnlock = achievement['clicksToUnlock'];
- //    	var changesBigImage = achievement['changesBigImage'];
- //    	var newBigImage = achievement['newBigImage'];
- //    	var message = achievement['message'];
- //    	var achievementID = achievement['achievementID'];
+		var achievementimage = "";
+  //   	if (typeof achievementImageList == 'undefined') {
+		// 	achievementimage = "";
+		// } else {
+		// 	achievementimage = achievementImageList;
+		// }
+    	
+    	var clicksToUnlock = 0;
+    	if (typeof clicksToUnlockList == 'undefined') {
+			clicksToUnlock = 0;
+		} else {
+			clicksToUnlock = parseInt(clicksToUnlockList);
+		}
 
-	//     sql = 'INSERT INTO Achievements (gameID, name, image, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
- //        + gameID + '\', \'' 
- //        + name + '\', \'' 
- //        + image + '\', ' 
- //        + clicksToUnlock + '\', ' 
- //        + changesBigImage + '\', ' 
- //        + newBigImage + '\', ' 
- //        + message + '\', ' 
- //        +  achievementID + ')';
 
- //    	q = conn.query(sql);
- //    	achievementID = achievementID + 1;
-	
-	// }
+    	var changesBigImage = 0;
+		if (typeof changesBigImageList == 'undefined') {
+			changesBigImage = 0;
+		} else {
+			changesBigImage = parseInt(changesBigImageList);
+		}
 
-	// var listItems = req.body['store'];
-	// itemID = itemID + 1;
+    	var newBigImage = "";
+    	if (typeof newBigImageList == 'undefined') {
+			newBigImage = "";
+		} else {
+			newBigImage = newBigImageList;
+		}
 
-	// for(var item of listItems) {
+    	var message = messageList;
+    	var achievementID = achievementID;
 
- //    	var image = item['image'];
- //    	var title = item['title'];
- //    	var cost = item['cost'];
- //    	var description = item['description'];
- //    	var costMultiplier = item['costMultiplier'];
- //    	var passiveClicks = item['passiveClicks'];
- //    	var passiveSecs = item['passiveSecs'];
- //    	var manualClickMultiplier = item['manualClickMultiplier'];
- //    	var autoClick = item['autoClick'];
+		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+         + gameID + '\', \'' 
+         + name + '\', \'' 
+         + achievementimage + '\', \'' 
+         + clicksToUnlock + '\', \'' 
+         + changesBigImage + '\', \'' 
+         + newBigImage + '\', \'' 
+         + message + '\', \'' 
+         +  achievementID + '\')';
 
- //    sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
- //        + gameID + '\', \'' 
- //        + image + '\', \'' 
- //        + title + '\', ' 
- //        + cost + '\', ' 
- //        + description + '\', ' 
- //        + costMultiplier + '\', ' 
- //        + passiveClicks + '\', ' 
- //        + passiveSecs + '\', '
- //        + manualClickMultiplier + '\', '
- //        + itemID + '\', '
- //        + autoClick + '\', '
- //        +  manualClick + ')';
+     	console.log(sql); 
+     	q = conn.query(sql);
 
-    // q = conn.query(sql);
+     	achievementID = achievementID + 1;
+
+	} else {
+		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
+		console.log(typeof nameList);
+		length = nameList.length;
+
+		for(var count = 0; count < length; count++) {
+
+    	var name = nameList[count];
+
+		var achievementimage = "";
+  //   	if (typeof achievementImageList == 'undefined') {
+		// 	achievementimage = "";
+		// } else {
+		// 	achievementimage = achievementImageList[count];
+		// }
+    	
+    	var clicksToUnlock = 0;
+    	if (typeof clicksToUnlockList == 'undefined') {
+			clicksToUnlock = 0;
+		} else {
+			clicksToUnlock = parseInt(clicksToUnlockList[count]);
+		}
+
+
+    	var changesBigImage = 0;
+		if (typeof changesBigImageList == 'undefined') {
+			changesBigImage = 0;
+		} else {
+			changesBigImage = parseInt(changesBigImageList[count]);
+		}
+
+    	var newBigImage = "";
+    	if (typeof newBigImageList == 'undefined') {
+			newBigImage = "";
+		} else {
+			newBigImage = newBigImageList[count];
+		}
+
+    	var message = messageList[count];
+    	var achievementID = achievementID;
+
+		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+         + gameID + '\', \'' 
+         + name + '\', \'' 
+         + achievementimage + '\', \'' 
+         + clicksToUnlock + '\', \'' 
+         + changesBigImage + '\', \'' 
+         + newBigImage + '\', \'' 
+         + message + '\', \'' 
+         +  achievementID + '\')';
+
+     	console.log(sql); 
+     	q = conn.query(sql);
+
+     	achievementID = achievementID + 1;
+ 	
+ 	}
+	}
+ 
+
+	// STORE
 
 	itemID = itemID + 1;
-	
+ 
+ 	var storeimageList = req.body['storeimage'];
+ 	var titleList = req.body['title'];
+ 	var costList = req.body['cost'];
+ 	var descriptionList = req.body['description'];
+ 	var costMultiplierList = req.body['costMultiplier'];
+ 	var passiveClicksList = req.body['passiveClicks'];
+ 	var passiveSecsList = req.body['passiveSecs'];
+ 	var manualClickMultiplierList = req.body['manualClickMultiplier'];
+ 	var autoClickList = req.body['autoClick'];
+ 	var manualClickList = req.body['manualClick'];
+
+	var lengthStore = 0;
+	if(typeof titleList === "string") {
+		var storeimage = "";
+     	if (typeof storeimageList == 'undefined') {
+			storeimage = "";
+		} else {
+			storeimage = storeimageList;
+		}
+
+     	var title = titleList;
+     	var cost = costList;
+     	var description = descriptionList;
+     	
+     	var costMultiplier = 0;
+    	if (typeof costMultiplierList == 'undefined') {
+			costMultiplier = 0;
+		} else {
+			costMultiplier = parseInt(costMultiplierList);
+		}
+     	
+     	var passiveClicks = 0;
+    	if (typeof passiveClicksList == 'undefined') {
+			passiveClicks = 0;
+		} else {
+			passiveClicks = parseInt(passiveClicksList);
+		}
+     	
+     	var passiveSecs = passiveSecsList;
+     	var manualClickMultiplier = manualClickMultiplierList;
+     	
+     	var autoClick = 0;
+    	if (typeof autoClickList == 'undefined') {
+			autoClick = 0;
+		} else {
+			autoClick = parseInt(autoClickList);
+		}
+
+     	var manualClick = 0;
+    	if (typeof manualClickList == 'undefined') {
+			manualClick = 0;
+		} else {
+			manualClick = parseInt(manualClickList);
+		}
+ 
+     sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
+         + gameID + '\', \'' 
+         + storeimage + '\', \'' 
+         + title + '\', ' 
+         + cost + '\', ' 
+         + description + '\', ' 
+         + costMultiplier + '\', ' 
+         + passiveClicks + '\', ' 
+         + passiveSecs + '\', '
+         + manualClickMultiplier + '\', '
+         + autoClick + '\', '
+         + itemID + '\', '
+         +  manualClick + ')';
+ 
+     	console.log(sql);
+     	q = conn.query(sql);
+ 		itemID = itemID + 1;
+
+	} else {
+		lengthStore = titleList.length;
+
+		 	for(var count = 0; count < lengthStore; count++) {
+ 
+     	var storeimage = "";
+     	if (typeof storeimageList == 'undefined') {
+			storeimage = "";
+		} else {
+			storeimage = storeimageList[count];
+		}
+
+     	var title = titleList[count];
+     	var cost = costList[count];
+     	var description = descriptionList[count];
+
+        var costMultiplier = 0;
+    	if (typeof costMultiplierList == 'undefined') {
+			costMultiplier = 0;
+		} else {
+			costMultiplier = parseInt(costMultiplierList[count]);
+		}
+     	
+     	var passiveClicks = 0;
+    	if (typeof passiveClicksList == 'undefined') {
+			passiveClicks = 0;
+		} else {
+			passiveClicks = parseInt(passiveClicksList[count]);
+		}
+     	
+
+     	var passiveSecs = passiveSecsList[count];
+     	var manualClickMultiplier = manualClickMultiplierList[count];
+     	
+    	var autoClick = 0;
+    	if (typeof autoClickList == 'undefined') {
+			autoClick = 0;
+		} else {
+			autoClick = parseInt(autoClickList[count]);
+		}
+
+     	var manualClick = 0;
+    	if (typeof manualClickList == 'undefined') {
+			manualClick = 0;
+		} else {
+			manualClick = parseInt(manualClickList[count]);
+		}
+ 
+     sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
+         + gameID + '\', \'' 
+         + storeimage + '\', \'' 
+         + title + '\', \''  
+         + cost + '\', \''  
+         + description + '\', \''  
+         + costMultiplier + '\', \''  
+         + passiveClicks + '\', \''  
+         + passiveSecs + '\', \'' 
+         + manualClickMultiplier + '\', \'' 
+         + itemID + '\', \'' 
+         + autoClick + '\', \'' 
+         +  manualClick + '\')';
+ 
+     	q = conn.query(sql);
+ 		itemID = itemID + 1;
+ 	}
+	}
+
+
     
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
