@@ -27,65 +27,55 @@
   	<!-- Click Station -->
     <div class="col-lg-4 col-md-6 col-12">
       <div id="big-clicker-container">
-      <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
+<input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
         <img src="defaultclick.png" onclick="pulse();" id="big-image" class="pointer">
       </div>
-      <input name="game[defaultImage]" type="file" /><br>
+      <input name="game[defaultImage]" type="file" required/> <br/>
       <span class="num-clicks">#</span> of <input name="game[clickName]" type="text" value="clicks"/><br/>
       <input name="game[clickOverride]" type="checkbox" value="clicks"/>Override default click icon?<br/>
       <input name="game[overrideIcon]" type="file" value="clicks"/><br/>
       <input name="game[clickSFX]" type="file" value="clicks"/><br/>
-     
+
+
+
+      <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
 
     <!-- Achievements / Progress -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div id="achievements">
-
-      <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
+    <div id="achievementList" class="col-lg-4 col-md-6 col-12">
+        <input name="game[achievementsTitle]" type="text" value="d"/><br/>
 
 
       <!-- an individual achievement -->
-      <fieldset class="achievement" id="base-achievement">
-        <input name="image" type="file"><br/>
-        <input name="name" type="text" placeholder="Achievement Name"><br/>
-        <input name="message" type="text" placeholder="Unlock Message"><br/>
-        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
-        <input name="newBigImage" type="file"><br/>
+      <fieldset id="achievement">
+        <input name="achievementimage" type="file" required><br/>
+        <input name="name" type="text" placeholder="Achievement Name" required><br/>
+        <input name="message" type="text" placeholder="Unlock Message" required><br/>
+        <input name="clicksToUnlock" type="number" placeholder="10" required> Clicks to Unlock<br/>
+        <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
+        <input name="newBigImage" type="file" required><br/>
       </fieldset> 
+      <input type="button" value="Add New Achievement" onclick="cloneElement('achievement', 'achievementList');">
     </div>
 
-      <input type="button" value="Add New Achievement" onclick="cloneElement('base-achievement','achievements');">
-    </div>
-
-<!--       title: "",
-          image: "",
-          cost: int,
-          description: ""
-          costMultiplier: int,
-          passiveClicks: int,
-          passiveSecs: int,
-          manualClickMultiplier: int,
-          autoClick: int, -->
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
       <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
       <!-- a single item in a store -->
-      <div id="store-items">
+      <div id="store">
       <fieldset class="store-item" id="base-store-item">
-        <input name="image" type="file"><br/>
+        <input name="storeimage" type="file" value=""><br/>
         <input name="title" type="text" placeholder="Item Name"><br/>
-        <input name="description" type="text" placeholder=Item Description"><br/>
-        <input name="cost" type="number" placeholder="10">Cost (in clicks)<br/>
-        <input name="autoClick" type="checkbox"> Auto Click <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="number" value="5"> seconds <br/> 
-        <input name="manualClickMultiplier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
+        <input name="description" type="text" placeholder="Item Description" required><br/>
+        <input name="cost" type="text" placeholder="10" required>Cost (in clicks)<br/>
+        <input name="autoClick" value="0" type="checkbox" required> Auto Click
+        <input name="passiveSecs" type="number" value="10" required> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
+        <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
 
-        <input name="store-item-click-multipier" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
       </fieldset> 
       </div>
-      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store-items');">
+      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
     </div>
     <input type="submit" value="Submit" id="playButton">
   </div>
@@ -104,7 +94,7 @@
       function cloneElement(element, appendTo){
         var elmnt = document.getElementById(element);
         var cln = elmnt.cloneNode(true);
-         document.getElementById(appendTo).appendChild(cln);
+        document.getElementById(appendTo).appendChild(cln);
       }
 
       var clicks = 0;
