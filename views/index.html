@@ -10,17 +10,24 @@
 
     <title>Clicker Creator: Make your own clicker game!</title>
     <style>
-      div { border: 1px solid black; }
+      div { 
+        border: 1px solid black; 
+      }
 
-      input.title { font-size: 1.5em; }
-      .num-clicks {}
-      #game-title {}
+      input.title { 
+        font-size: 1.5em; 
+      }
 
+      .pointer {
+        cursor: pointer;
+      }
+
+      #img
     </style>
   </head>
   <body>
 
-<div class="container">
+<form class="container-fluid" method="post" action="#" id="gameForm">
   <!-- Header -->
   <div class="row" id="header">
     <div class="col">
@@ -30,43 +37,61 @@
 
   <!-- Main Content -->
   <div class="row">
-  	<form>
-    <div class="form-group">
   	<!-- Click Station -->
-    <div class="col">
-      <input name="gameTitle" class="title" id="game-title" type="text" value="Cookie Clicker"/><br/>
-      <span class="num-clicks">#</span> <input name="clickName" type="text" value="clicks"/><br/>
-      <img src="defaultclick.png" alt="Default Click Image"/>
+    <div class="col-lg-4 col-md-6 col-12">
+      <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
+      <input name="game[defaultImage]" />
+      <span class="game[num-clicks]">#</span> 
+      <input name="game[clickName]" type="text" value="clicks"/><br/>
+      <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
+      <input name="game[storeName]" type="text" value="clicks"/><br/>
+      <input name="game[clickOverride]" type="checkbox" value="clicks"/><br/>
+      <input name="game[overrideIcon]" type="checkbox" value="clicks"/><br/>
+      <input name="game[clickSFX]" type="checkbox" value="clicks"/><br/>
+      <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
 
     <!-- Achievements / Progress -->
-    <div class="col">
-      <input name="gameTitle" class="title" id="game-title" type="text" value="Achievements"/><br/>
+    <div class="col-lg-4 col-md-6 col-12">
+      <input name="gameTitle" class="title" type="text" value="Achievements"/><br/>
 
       <!-- an individual achievement -->
       <fieldset class="achievement">
-        <input name="achievement-icon-1" type="file" placeholder="achievement.icon.png"><br/>
+        <input name="achievement-icon-1" type="file"><br/>
         <input name="achievement-name-1" type="text" placeholder="Achievement Name"><br/>
         <input name="achievement-message-1" type="text" placeholder="Unlock Message"><br/>
         <input name="achievement-clicks-1" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
+        <input name="achievement-change-image-1" type="checkbox"> Changes Click Image?<br/>
         <input name="achievement-bigclick-img-1" type="file"><br/>
       </fieldset> 
+      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
     </div>
 
     <!-- Store -->
-    <div class="col">
-      3 of 3
+    <div class="col-lg-4 col-12">
+      <input name="storeTitle" class="title" type="text" value="Store Name"/><br/>
+      <!-- a single item in a store -->
+      <fieldset class="store-item" id="base-store-item">
+        <input name="store-item-icon-1" type="file"><br/>
+        <input name="store-item-name-1" type="text" placeholder="Item Name"><br/>
+        <input name="store-description-1" type="text" placeholder=Item Description"><br/>
+        <input name="store-item-clicks-1" type="number" placeholder="10">Cost (in clicks)<br/>
+        <input name="store-item-passive-1" type="checkbox"> Auto Click <input name="-store-item-autoclick-1" type="number" value="10"> times every <input name="-store-item-autoclickseconds-1" type="number" value="5"> seconds <br/> 
+        <input name="store-item-click-multipier-1" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
+
+        <input name="store-item-click-multipier-1" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
+      </fieldset> 
+      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item');">
     </div>
+    <input type="submit" value="Submit" id="playButton">
   </div>
 </form>
-</form>
-</div>
     <script src="index.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </body>
 </html>

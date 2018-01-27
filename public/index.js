@@ -1,14 +1,16 @@
 window.addEventListener('load', function() {
 
-	$("playButton").on('click', function() {
+	$('#playButton').on('click', function(e) {
 
-		var data = {
+		 e.preventDefault();
 
-		}
+		console.log($('#gameForm').serialize());
+
+		var data = $('#gameForm').serialize();
 
 		$.post( '/createGame', data, function( res ) {
 		  console.log(res);
 		});
-	}
+	});
 
 }, false);
