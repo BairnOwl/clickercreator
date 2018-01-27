@@ -33,7 +33,8 @@
   </head>
   <body>
 
-<form class="container-fluid" method="post" action="#">
+<form class="container-fluid" method="post" action="#" id="gameForm">
+
   <!-- Header -->
   <div class="row" id="header">
     <div class="col">
@@ -45,9 +46,16 @@
   <div class="row">
   	<!-- Click Station -->
     <div class="col-lg-4 col-md-6 col-12">
-      <input name="gameTitle" class="title" type="text" value="Cookie Clicker"/><br/>
-      <span class="num-clicks">#</span> <input name="clickName" type="text" value="clicks"/><br/>
-      <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/>
+      <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
+      <input name="game[defaultImage]" />
+      <span class="game[num-clicks]">#</span> 
+      <input name="game[clickName]" type="text" value="clicks"/><br/>
+      <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
+      <input name="game[storeName]" type="text" value="clicks"/><br/>
+      <input name="game[clickOverride]" type="checkbox" value="clicks"/><br/>
+      <input name="game[overrideIcon]" type="checkbox" value="clicks"/><br/>
+      <input name="game[clickSFX]" type="checkbox" value="clicks"/><br/>
+      <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
 
     <!-- Achievements / Progress -->

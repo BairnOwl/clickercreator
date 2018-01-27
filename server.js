@@ -80,6 +80,9 @@ app.get('*', function(request, response) {
 app.post('/createGame', function(req, res) {
 
 	// Game section
+
+	console.log(req.body);
+	
 	var gameTitle = req.body['game']['gameTitle'];
 	var defaultImage = req.body['game']['defaultImage'];
 	var clickName = req.body['game']['clickName'];
