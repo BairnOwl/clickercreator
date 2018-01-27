@@ -30,8 +30,11 @@ app.get('*', function(request, response) {
         gameID = res.rows[0]['numGames'];
     });; 
 
-    var sql = 'SELECT count(achievementID) FROM Achievements';
-    achievementID = conn.query(sql); 
+
+    var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
+    achievementID = conn.query(sql, function(err, res) {
+        achievementID = res.rows[0]['numAchievement'];
+    });; 
 
     var sql = 'SELECT count(itemID) FROM Store';
     itemID = conn.query(sql); 
@@ -148,22 +151,48 @@ app.post('/createGame', function(req, res) {
 	for(var count in nameList) {
 
     	var name = nameList[count];
-    	var achievementimage = achievementImageList[count];
-    	var clicksToUnlock = clicksToUnlockList[count];
-    	var changesBigImage = changesBigImageList[count];
-    	var newBigImage = newBigImageList[count];
+
+		var achievementimage = 0;
+    	if (typeof achievementImageList == 'undefined') {
+			achievementimage = 0;
+		} else {
+			achievementimage = parseInt(achievementImageList[count]);
+		}
+    	
+    	var clicksToUnlock = 0;
+    	if (typeof clicksToUnlockList == 'undefined') {
+			clicksToUnlock = 0;
+		} else {
+			clicksToUnlock = parseInt(clicksToUnlockList[count]);
+		}
+
+
+    	var changesBigImage = 0;
+		if (typeof changesBigImageList == 'undefined') {
+			changesBigImage = 0;
+		} else {
+			changesBigImage = parseInt(changesBigImageList[count]);
+		}
+
+    	var newBigImage = "";
+    	if (typeof newBigImageList == 'undefined') {
+			newBigImage = 0;
+		} else {
+			newBigImage = newBigImageList[count];
+		}
+
     	var message = messageList[count];
     	var achievementID = achievementID;
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
          + name + '\', \'' 
-         + achievementimage + '\', ' 
-         + clicksToUnlock + '\', ' 
-         + changesBigImage + '\', ' 
-         + newBigImage + '\', ' 
-         + message + '\', ' 
-         +  achievementID + ')';
+         + achievementimage + '\', \'' 
+         + clicksToUnlock + '\', \'' 
+         + changesBigImage + '\', \'' 
+         + newBigImage + '\', \'' 
+         + message + '\', \'' 
+         +  achievementID + '\')';
  
      	q = conn.query(sql);
      	achievementID = achievementID + 1;
