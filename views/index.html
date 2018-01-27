@@ -50,8 +50,6 @@
       <input name="game[defaultImage]" />
       <span class="game[num-clicks]">#</span> 
       <input name="game[clickName]" type="text" value="clicks"/><br/>
-      <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
-      <input name="game[storeName]" type="text" value="clicks"/><br/>
       <input name="game[clickOverride]" type="checkbox" value="1"/><br/>
       <input name="game[overrideIcon]" type="checkbox" value="1"/><br/>
       <input name="game[clickSFX]" type="text" value="clicks"/><br/>
@@ -60,17 +58,17 @@
 
     <!-- Achievements / Progress -->
     <div class="col-lg-4 col-md-6 col-12">
-      <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
+        <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
 
 
       <!-- an individual achievement -->
       <fieldset class="achievement">
-        <input name="image" type="file"><br/>
-        <input name="name" type="text" placeholder="Achievement Name"><br/>
-        <input name="message" type="text" placeholder="Unlock Message"><br/>
-        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
-        <input name="newBigImage" type="file"><br/>
+        <input name="achievement[0][image]" type="file"><br/>
+        <input name="achievement[0][name]" type="text" placeholder="Achievement Name"><br/>
+        <input name="achievement[0][message]" type="text" placeholder="Unlock Message"><br/>
+        <input name="achievement[0][clicksToUnlock]" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="achievement[0][changesBigImage]" type="checkbox"> Changes Click Image?<br/>
+        <input name="achievement[0][newBigImage]" type="file"><br/>
       </fieldset> 
       <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
     </div>
@@ -83,22 +81,22 @@
           passiveClicks: int,
           passiveSecs: int,
           manualClickMultiplier: int,
-          autoClick: int, -->
+          autoClick: int,
+          manualClick: int, -->
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
-      <input name="storeTitle" class="title" type="text" value="Store Name"/><br/>
+        <input name="game[storeName]" type="text" value="clicks"/><br/>
       <!-- a single item in a store -->
-      <div id="store-items">
+      <div id="store">
       <fieldset class="store-item" id="base-store-item">
-        <input name="image" type="file"><br/>
-        <input name="title" type="text" placeholder="Item Name"><br/>
-        <input name="description" type="text" placeholder=Item Description"><br/>
-        <input name="cost" type="number" placeholder="10">Cost (in clicks)<br/>
-        <input name="autoClick" type="checkbox"> Auto Click <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="number" value="5"> seconds <br/> 
-        <input name="manualClickMultiplier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
+        <input name="store[0][image]" type="file"><br/>
+        <input name="store[0][title]" type="text" placeholder="Item Name"><br/>
+        <input name="store[0][description]" type="text" placeholder=Item Description"><br/>
+        <input name="store[0][cost]" type="text" placeholder="10">Cost (in clicks)<br/>
+        <input name="store[0][autoClick]" type="checkbox"> Auto Click <input name="store[0][passiveSecs]" type="number" value="10"> times every <input name="store[0][passiveSecs]" type="text" value="5"> seconds <br/> 
+        <input name="store[0][manualClick]" type="checkbox"> Each Manual (Mouse) Click Worth <input name="store[0][manualClickMultiplier]" type="text" value="1.5"> times more <br/>
 
-        <input name="store-item-click-multipier" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
       </fieldset> 
       </div>
       <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store-items');">

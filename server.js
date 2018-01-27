@@ -70,6 +70,7 @@ app.get('*', function(request, response) {
 					passiveSecs: int,
 					manualClickMultiplier: int,
 					autoClick: int,
+					manualClick: int,
 				}
 			]
 		
@@ -154,7 +155,7 @@ app.post('/createGame', function(req, res) {
     	var manualClickMultiplier = item['manualClickMultiplier'];
     	var autoClick = item['autoClick'];
 
-    sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID) VALUES (\'' 
+    sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
         + gameID + '\', \'' 
         + image + '\', \'' 
         + title + '\', ' 
@@ -164,8 +165,9 @@ app.post('/createGame', function(req, res) {
         + passiveClicks + '\', ' 
         + passiveSecs + '\', '
         + manualClickMultiplier + '\', '
+        + itemID + '\', '
         + autoClick + '\', '
-        +  itemID + ')';
+        +  manualClick + ')';
 
     q = conn.query(sql);
 	itemID = itemID + 1;
