@@ -13,7 +13,7 @@
   </head>
   <body>
 
-<form class="container-fluid" method="post" action="/" id="gameForm">
+<form class="container-fluid" method="post" id="gameForm">
 
   <!-- Header -->
   <div class="row" id="header">
@@ -40,21 +40,34 @@
 
     <!-- Achievements / Progress -->
     <div class="col-lg-4 col-md-6 col-12">
-      <input name="game[achievementTitle]" class="title" type="text" value="Achievements"/><br/>
       <div id="achievements">
+
+      <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
+
+
       <!-- an individual achievement -->
       <fieldset class="achievement" id="base-achievement">
-        <input name="achievement-icon" type="file"><br/>
-        <input name="achievement-name" type="text" placeholder="Achievement Name"><br/>
-        <input name="achievement-message" type="text" placeholder="Unlock Message"><br/>
-        <input name="achievement-clicks" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
-        <input name="achievement-bigclick-img" type="file"><br/>
+        <input name="image" type="file"><br/>
+        <input name="name" type="text" placeholder="Achievement Name"><br/>
+        <input name="message" type="text" placeholder="Unlock Message"><br/>
+        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
+        <input name="newBigImage" type="file"><br/>
       </fieldset> 
     </div>
 
       <input type="button" value="Add New Achievement" onclick="cloneElement('base-achievement','achievements');">
     </div>
+
+<!--       title: "",
+          image: "",
+          cost: int,
+          description: ""
+          costMultiplier: int,
+          passiveClicks: int,
+          passiveSecs: int,
+          manualClickMultiplier: int,
+          autoClick: int, -->
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
@@ -62,24 +75,27 @@
       <!-- a single item in a store -->
       <div id="store-items">
       <fieldset class="store-item" id="base-store-item">
-        <input name="store-item-icon" type="file"><br/>
-        <input name="store-item-name" type="text" placeholder="Item Name"><br/>
-        <input name="store-description" type="text" placeholder="Item Description"><br/>
-        <input name="store-item-clicks" type="number" placeholder="10">Cost (in clicks)<br/>
-        <input name="store-item-passive" type="checkbox"> Auto Click <input name="-store-item-autoclick" type="number" value="10"> times every <input name="-store-item-autoclickseconds-1" type="number" value="5"> seconds <br/> 
-        <input name="store-item-click-multipier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
+        <input name="image" type="file"><br/>
+        <input name="title" type="text" placeholder="Item Name"><br/>
+        <input name="description" type="text" placeholder=Item Description"><br/>
+        <input name="cost" type="number" placeholder="10">Cost (in clicks)<br/>
+        <input name="autoClick" type="checkbox"> Auto Click <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="number" value="5"> seconds <br/> 
+        <input name="manualClickMultiplier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
 
         <input name="store-item-click-multipier" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
       </fieldset> 
       </div>
       <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store-items');">
     </div>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" id="playButton">
   </div>
 </form>
+
+    <script src="index.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
