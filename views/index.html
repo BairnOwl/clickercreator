@@ -52,9 +52,9 @@
       <input name="game[clickName]" type="text" value="clicks"/><br/>
       <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
       <input name="game[storeName]" type="text" value="clicks"/><br/>
-      <input name="game[clickOverride]" type="checkbox" value="clicks"/><br/>
-      <input name="game[overrideIcon]" type="checkbox" value="clicks"/><br/>
-      <input name="game[clickSFX]" type="checkbox" value="clicks"/><br/>
+      <input name="game[clickOverride]" type="checkbox" value="1"/><br/>
+      <input name="game[overrideIcon]" type="checkbox" value="1"/><br/>
+      <input name="game[clickSFX]" type="text" value="clicks"/><br/>
       <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
 
@@ -62,14 +62,15 @@
     <div class="col-lg-4 col-md-6 col-12">
       <input name="achievementTitle" class="title" type="text" value="Achievements"/><br/>
 
+
       <!-- an individual achievement -->
       <fieldset class="achievement">
-        <input name="achievement-icon" type="file"><br/>
-        <input name="achievement-name" type="text" placeholder="Achievement Name"><br/>
-        <input name="achievement-message" type="text" placeholder="Unlock Message"><br/>
-        <input name="achievement-clicks" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
-        <input name="achievement-bigclick-img" type="file"><br/>
+        <input name="image" type="file"><br/>
+        <input name="name" type="text" placeholder="Achievement Name"><br/>
+        <input name="message" type="text" placeholder="Unlock Message"><br/>
+        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
+        <input name="newBigImage" type="file"><br/>
       </fieldset> 
       <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
     </div>

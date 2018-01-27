@@ -88,8 +88,8 @@ app.post('/createGame', function(req, res) {
 	var clickName = req.body['game']['clickName'];
 	var achievementsTitle = req.body['game']['achievementsTitle'];
 	var storeName = req.body['game']['storeName'];
-	var clickOverride = req.body['game']['clickOverride'];
-	var overrideIcon = req.body['game']['overrideIcon'];
+	var clickOverride = parseInt(req.body['game']['clickOverride']);
+	var overrideIcon = parseInt(req.body['game']['overrideIcon']);
 	var clickSFX = req.body['game']['clickSFX'];
 
 	// write sql query here
