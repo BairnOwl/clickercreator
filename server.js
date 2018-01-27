@@ -79,17 +79,53 @@ app.post('/', function(req, res) {
 	var overrideIcon = req.body['game']['overrideIcon'];
 	var clickSFX = req.body['game']['clickSFX'];
 
-
 	// write sql query here
-	var sql = 'INSERT INTO messages (room, nickname, body, time) VALUES (\'' 
-        + roomName + '\', \'' 
-        + nickname + '\', \'' 
-        + message + '\', '  
-        +  time + ')';
+
+	//GAME
+	var sql = 'INSERT INTO Game (gameID, gameTitle, defaultImage, clickName, achievementsTitle, storeName, clickOverride, overrideIcon, clickSFX) VALUES (\'' 
+        + gameID + '\', \'' 
+        + gameTitle + '\', \'' 
+        + defaultImage + '\', ' 
+        + clickName + '\', ' 
+        + achievementsTitle + '\', ' 
+        + storeName + '\', ' 
+        + clickOverride + '\', ' 
+        + overrideIcon + '\', '
+        +  clickSFX + ')';
 
     var q = conn.query(sql);
 
-    response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
+    // ACHIEVEMENTS
+    // for each achievement...
+
+    var sql = 'INSERT INTO Achievements (gameID, name, image, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+        + gameID + '\', \'' 
+        + name + '\', \'' 
+        + image + '\', ' 
+        + clicksToUnlock + '\', ' 
+        + changesBigImage + '\', ' 
+        + newBigImage + '\', ' 
+        + message + '\', ' 
+        +  achievementID + ')';
+
+    var q = conn.query(sql);
+
+    	var sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,passiveClickMultiplier,itemID) VALUES (\'' 
+        + gameID + '\', \'' 
+        + image + '\', \'' 
+        + title + '\', ' 
+        + cost + '\', ' 
+        + description + '\', ' 
+        + costMultiplier + '\', ' 
+        + passiveClicks + '\', ' 
+        + passiveSecs + '\', '
+        + manualClickMultiplier + '\', '
+        + passiveClickMultiplier + '\', '
+        +  itemID + ')';
+
+    var q = conn.query(sql);
+
+    //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
 
 
