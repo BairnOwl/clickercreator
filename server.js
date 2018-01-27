@@ -7,8 +7,8 @@ var conn = anyDB.createConnection('sqlite3://database.db');
 
 var engine = require('consolidate');
 
-app.engine('html', engines.hogan); // tell Express to run .html files through Hogan
-app.set('views', __dirname + '/templates'); // tell Express where to find templates
+app.engine('html', engine.hogan); // tell Express to run .html files through Hogan
+app.set('views', __dirname + '/views'); // tell Express where to find templates
 app.use(express.static('public'));
 
 var bodyParser = require('body-parser');
