@@ -12,7 +12,7 @@
     <style>
       div { border: 1px solid black; }
 
-      .title {}
+      input.title { font-size: 1.5em; }
       .num-clicks {}
       #game-title {}
 
@@ -31,17 +31,27 @@
   <!-- Main Content -->
   <div class="row">
   	<form>
+    <div class="form-group">
   	<!-- Click Station -->
     <div class="col">
-      <input name="gameTitle" class="title" id="game-title" type="text" value="Cookie Clicker"/><br>
-      <span class="num-clicks">#</span> <input name="clickName" type="text" value="clicks"/><br>
+      <input name="gameTitle" class="title" id="game-title" type="text" value="Cookie Clicker"/><br/>
+      <span class="num-clicks">#</span> <input name="clickName" type="text" value="clicks"/><br/>
       <img src="defaultclick.png" alt="Default Click Image"/>
     </div>
 
     <!-- Achievements / Progress -->
     <div class="col">
-      <input name="gameTitle" class="title" id="game-title" type="text" value="Cookie Clicker"/><br>
-      <
+      <input name="gameTitle" class="title" id="game-title" type="text" value="Achievements"/><br/>
+
+      <!-- an individual achievement -->
+      <fieldset class="achievement">
+        <input name="achievement-icon-1" type="file" placeholder="achievement.icon.png"><br/>
+        <input name="achievement-name-1" type="text" placeholder="Achievement Name"><br/>
+        <input name="achievement-message-1" type="text" placeholder="Unlock Message"><br/>
+        <input name="achievement-clicks-1" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
+        <input name="achievement-bigclick-img-1" type="file"><br/>
+      </fieldset> 
     </div>
 
     <!-- Store -->
@@ -49,6 +59,7 @@
       3 of 3
     </div>
   </div>
+</form>
 </form>
 </div>
 
