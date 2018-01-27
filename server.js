@@ -112,18 +112,24 @@ app.post('/createGame', function(req, res) {
 
     // ACHIEVEMENTS
     
-    var listAchievements = req.body['achievements'][0];
     achievementID = achievementID + 1;
 
-    for(var achievement of listAchievements) {
+   	var nameList = req.body['name'];
+	var achievementImageList = req.body['achievementimage'];
+	var clicksToUnlockList = req.body['clicksToUnlock'];
+	var changesBigImageList = req.body['changesBigImage'];
+	var newBigImageList = req.body['newBigImage'];
+	var messageList = req.body['message'];
 
-    	var name = achievement['name'];
-    	var achievementimage = achievement['achievementimage'];
-    	var clicksToUnlock = achievement['clicksToUnlock'];
-    	var changesBigImage = achievement['changesBigImage'];
-    	var newBigImage = achievement['newBigImage'];
-    	var message = achievement['message'];
-    	var achievementID = achievement['achievementID'];
+    for(var count in nameList) {
+
+    	var name = nameList[count];
+    	var achievementimage = achievementImageList[count];
+    	var clicksToUnlock = clicksToUnlockList[count];
+    	var changesBigImage = changesBigImageList[count];
+    	var newBigImage = newBigImageList[count];
+    	var message = messageList[count];
+    	var achievementID = achievementID;
 
 	    sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
         + gameID + '\', \'' 
@@ -153,7 +159,7 @@ app.post('/createGame', function(req, res) {
 	var autoClickList = req.body['autoClick'];
 
 
-	for(var count in templist) {
+	for(var count in storeimageList) {
 
     	var storeimage = storeimageList[count];
     	var title = titleList[count];
