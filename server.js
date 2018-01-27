@@ -36,8 +36,12 @@ app.get('*', function(request, response) {
         achievementID = res.rows[0]['numAchievement'];
     });; 
 
-    var sql = 'SELECT count(itemID) FROM Store';
-    itemID = conn.query(sql); 
+
+    var sql = 'SELECT count(itemID) as numStore FROM Store';
+    itemID = conn.query(sql, function(err, res) {
+        itemID = res.rows[0]['numStore'];
+    });; 
+
 });
 
 /* 
@@ -148,16 +152,16 @@ app.post('/createGame', function(req, res) {
 	var newBigImageList = req.body['newBigImage'];
 	var messageList = req.body['message'];
 
-	for(var count in nameList) {
+	for(var count in achievementImageList) {
 
     	var name = nameList[count];
 
-		var achievementimage = 0;
-    	if (typeof achievementImageList == 'undefined') {
-			achievementimage = 0;
-		} else {
-			achievementimage = parseInt(achievementImageList[count]);
-		}
+		var achievementimage = "";
+  //   	if (typeof achievementImageList == 'undefined') {
+		// 	achievementimage = "";
+		// } else {
+		// 	achievementimage = achievementImageList[count];
+		// }
     	
     	var clicksToUnlock = 0;
     	if (typeof clicksToUnlockList == 'undefined') {
@@ -176,7 +180,7 @@ app.post('/createGame', function(req, res) {
 
     	var newBigImage = "";
     	if (typeof newBigImageList == 'undefined') {
-			newBigImage = 0;
+			newBigImage = "";
 		} else {
 			newBigImage = newBigImageList[count];
 		}
@@ -193,8 +197,10 @@ app.post('/createGame', function(req, res) {
          + newBigImage + '\', \'' 
          + message + '\', \'' 
          +  achievementID + '\')';
- 
+
+     	console.log(sql); 
      	q = conn.query(sql);
+
      	achievementID = achievementID + 1;
  	
  	}
