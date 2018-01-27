@@ -14,6 +14,10 @@
         border: 1px solid black; 
       }
 
+      fieldset . {
+
+      }
+
       input.title { 
         font-size: 1.5em; 
       }
@@ -22,7 +26,9 @@
         cursor: pointer;
       }
 
-      #img
+      #main-click-img {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -31,7 +37,7 @@
   <!-- Header -->
   <div class="row" id="header">
     <div class="col">
-      <h1>Cookie Clicker</h1>
+      <h1>Cookie Clicker Creator</h1>
     </div>
   </div>
 
@@ -50,12 +56,12 @@
 
       <!-- an individual achievement -->
       <fieldset class="achievement">
-        <input name="achievement-icon-1" type="file"><br/>
-        <input name="achievement-name-1" type="text" placeholder="Achievement Name"><br/>
-        <input name="achievement-message-1" type="text" placeholder="Unlock Message"><br/>
-        <input name="achievement-clicks-1" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement-change-image-1" type="checkbox"> Changes Click Image?<br/>
-        <input name="achievement-bigclick-img-1" type="file"><br/>
+        <input name="achievement-icon" type="file"><br/>
+        <input name="achievement-name" type="text" placeholder="Achievement Name"><br/>
+        <input name="achievement-message" type="text" placeholder="Unlock Message"><br/>
+        <input name="achievement-clicks" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="achievement-change-image" type="checkbox"> Changes Click Image?<br/>
+        <input name="achievement-bigclick-img" type="file"><br/>
       </fieldset> 
       <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
     </div>
@@ -64,17 +70,19 @@
     <div class="col-lg-4 col-12">
       <input name="storeTitle" class="title" type="text" value="Store Name"/><br/>
       <!-- a single item in a store -->
+      <div id="store-items">
       <fieldset class="store-item" id="base-store-item">
-        <input name="store-item-icon-1" type="file"><br/>
-        <input name="store-item-name-1" type="text" placeholder="Item Name"><br/>
-        <input name="store-description-1" type="text" placeholder=Item Description"><br/>
-        <input name="store-item-clicks-1" type="number" placeholder="10">Cost (in clicks)<br/>
-        <input name="store-item-passive-1" type="checkbox"> Auto Click <input name="-store-item-autoclick-1" type="number" value="10"> times every <input name="-store-item-autoclickseconds-1" type="number" value="5"> seconds <br/> 
-        <input name="store-item-click-multipier-1" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
+        <input name="store-item-icon" type="file"><br/>
+        <input name="store-item-name" type="text" placeholder="Item Name"><br/>
+        <input name="store-description" type="text" placeholder=Item Description"><br/>
+        <input name="store-item-clicks" type="number" placeholder="10">Cost (in clicks)<br/>
+        <input name="store-item-passive" type="checkbox"> Auto Click <input name="-store-item-autoclick" type="number" value="10"> times every <input name="-store-item-autoclickseconds-1" type="number" value="5"> seconds <br/> 
+        <input name="store-item-click-multipier" type="checkbox"> Each Manual (Mouse) Click Worth <input name="-store-item-autoclick" type="number" value="1.5"> times more <br/>
 
-        <input name="store-item-click-multipier-1" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
+        <input name="store-item-click-multipier" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
       </fieldset> 
-      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item');">
+      </div>
+      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store-items');">
     </div>
     <input type="submit" value="Submit">
   </div>
@@ -84,10 +92,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <script>
-`   function
+
+      // appends a clone of element to the end of appendTo
+      function cloneElement(element, appendTo){
+        var elmnt = document.getElementById(element);
+        var cln = elmnt.cloneNode(true);
+         document.getElementById(appendTo).appendChild(cln);
+      }
     </script>
   </body>
 </html>
