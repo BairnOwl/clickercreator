@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 
     <title>Clicker Creator: Make your own clicker game!</title>
   </head>
@@ -18,7 +18,7 @@
   <!-- Header -->
   <div class="row" id="header">
     <div class="col">
-      <h1>Cookie Clicker Creator</h1>
+      <h1>Clicker Game Maker</h1>
     </div>
   </div>
 
@@ -26,16 +26,16 @@
   <div class="row">
   	<!-- Click Station -->
     <div class="col-lg-4 col-md-6 col-12">
+      <div id="big-clicker-container">
       <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
-      <img src="defaultclick.png" class="pointer">
+        <img src="defaultclick.png" onclick="pulse();" id="big-image" class="pointer">
+      </div>
       <input name="game[defaultImage]" type="file" /><br>
       <span class="num-clicks">#</span> of <input name="game[clickName]" type="text" value="clicks"/><br/>
-      <!--
-      <input name="game[clickOverride]" type="checkbox" value="clicks"/><br/>
-      <input name="game[overrideIcon]" type="checkbox" value="clicks"/><br/>
-      <input name="game[clickSFX]" type="checkbox" value="clicks"/><br/>
-       <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> 
-     -->
+      <input name="game[clickOverride]" type="checkbox" value="clicks"/>Override default click icon?<br/>
+      <input name="game[overrideIcon]" type="file" value="clicks"/><br/>
+      <input name="game[clickSFX]" type="file" value="clicks"/><br/>
+     
     </div>
 
     <!-- Achievements / Progress -->
@@ -106,6 +106,28 @@
         var cln = elmnt.cloneNode(true);
          document.getElementById(appendTo).appendChild(cln);
       }
+
+      var clicks = 0;
+      var isClicked = false;
+
+
+      function pulse(){
+        $('#big-image').clearQueue();
+        $('#big-image').addClass("transform-active")
+                       .delay(115)
+                       .queue(function() {
+                           $(this).removeClass("transform-active");
+                           $(this).dequeue();
+                       });
+        }
+
+        /*
+        if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
+        else
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
+      
+
 
     </script>
   </body>
