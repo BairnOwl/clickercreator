@@ -52,7 +52,7 @@ app.get('*', function(request, response) {
 		achievements: [ 
 				{
 					name: "",
-					image: "",
+					achievementimage: "",
 					clicksToUnlock: int,
 					changesBigImage: int,
 					newBigImage: "",
@@ -64,7 +64,7 @@ app.get('*', function(request, response) {
 		store:  [
 				{
 					title: "",
-					image: "",
+					storeimage: "",
 					cost: int,
 					description: ""
 					costMultiplier: int,
@@ -196,6 +196,7 @@ app.post('/createGame', function(req, res) {
  //        +  manualClick + ')';
 
     // q = conn.query(sql);
+
 	itemID = itemID + 1;
 	
     

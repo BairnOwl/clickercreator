@@ -62,27 +62,17 @@
 
 
       <!-- an individual achievement -->
-      <fieldset class="achievement">
-        <input name="achievement[image]" type="file"><br/>
-        <input name="achievement[name]" type="text" placeholder="Achievement Name"><br/>
-        <input name="achievement[message]" type="text" placeholder="Unlock Message"><br/>
-        <input name="achievement[clicksToUnlock]" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement[changesBigImage]" type="checkbox"> Changes Click Image?<br/>
-        <input name="achievement[newBigImage]" type="file"><br/>
+      <fieldset id="achievement">
+        <input name="achievementimage" type="file"><br/>
+        <input name="name" type="text" placeholder="Achievement Name"><br/>
+        <input name="message" type="text" placeholder="Unlock Message"><br/>
+        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
+        <input name="newBigImage" type="file"><br/>
       </fieldset> 
-      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item', 'achievementList');">
+      <input type="button" value="Add New Achievement" onclick="cloneElement('achievement', 'achievementList');">
     </div>
 
-<!--       title: "",
-          image: "",
-          cost: int,
-          description: ""
-          costMultiplier: int,
-          passiveClicks: int,
-          passiveSecs: int,
-          manualClickMultiplier: int,
-          autoClick: int,
-          manualClick: int, -->
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
@@ -94,7 +84,8 @@
         <input name="title" type="text" placeholder="Item Name"><br/>
         <input name="description" type="text" placeholder=Item Description"><br/>
         <input name="cost" type="text" placeholder="10">Cost (in clicks)<br/>
-        <input name="autoClick" type="checkbox"> Auto Click <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
+        <input name="autoClick" type="checkbox"> Auto Click
+        <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
         <input name="manualClick" type="checkbox"> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
 
       </fieldset> 
@@ -118,7 +109,7 @@
       function cloneElement(element, appendTo){
         var elmnt = document.getElementById(element);
         var cln = elmnt.cloneNode(true);
-         document.getElementById(appendTo).appendChild(cln);
+        document.getElementById(appendTo).appendChild(cln);
       }
     </script>
   </body>
