@@ -50,7 +50,7 @@ app.get('*', function(request, response) {
 		achievements: [ 
 				{
 					name: "",
-					image: "",
+					achievementimage: "",
 					clicksToUnlock: int,
 					changesBigImage: int,
 					newBigImage: "",
@@ -62,7 +62,7 @@ app.get('*', function(request, response) {
 		store:  [
 				{
 					title: "",
-					image: "",
+					storeimage: "",
 					cost: int,
 					description: ""
 					costMultiplier: int,
@@ -118,7 +118,7 @@ app.post('/createGame', function(req, res) {
     for(var achievement of listAchievements) {
 
     	var name = achievement['name'];
-    	var image = achievement['image'];
+    	var achievementimage = achievement['achievementimage'];
     	var clicksToUnlock = achievement['clicksToUnlock'];
     	var changesBigImage = achievement['changesBigImage'];
     	var newBigImage = achievement['newBigImage'];
@@ -145,7 +145,7 @@ app.post('/createGame', function(req, res) {
 
 	for(var item of listItems) {
 
-    	var image = item['image'];
+    	var storeimage = item['storeimage'];
     	var title = item['title'];
     	var cost = item['cost'];
     	var description = item['description'];
