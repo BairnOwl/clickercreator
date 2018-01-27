@@ -23,6 +23,66 @@ app.get('*', function(request, response) {
     response.render('index.html');
 });
 
+/* 
+	{
+		game: {
+			gameTitle: "",
+			defaultImage: "",
+			clickName: "",
+			achievementsTitle: "",
+			storeName: "",
+			clickOverride: int,
+			overrideIcon: int,
+			clickSFX: ""
+		}, 
+		achievements: {
+			achievementList: [
+				{
+					name: "",
+					image: "",
+					clicksToUnlock: int,
+					changesBigImage: int,
+					newBigImage: "",
+					message: ""
+				}
+			]
+
+		},
+		store: {
+			storeList: [
+				{
+					title: "",
+					image: "",
+					cost: int,
+					description: ""
+					costMultiplier: int,
+					passiveClicks: int,
+					passiveSecs: int,
+					manualClickMultiplier: int,
+					passiveClickMultiplier: int,
+				}
+			]
+		}
+	}
+*/
+
+
+app.post('', function(req, res) {
+	// Game section
+	var gameTitle = request.body['game']['gameTitle'];
+
+
+	// write sql query here
+	var sql = 'INSERT INTO messages (room, nickname, body, time) VALUES (\'' 
+        + roomName + '\', \'' 
+        + nickname + '\', \'' 
+        + message + '\', '  
+        +  time + ')';
+
+    var q = conn.query(sql);
+
+    response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
+});
 
 
 server.listen(8080, function(){
