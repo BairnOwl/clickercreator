@@ -21,11 +21,13 @@
       .pointer {
         cursor: pointer;
       }
+
+      #img
     </style>
   </head>
   <body>
 
-<form class="container-fluid">
+<form class="container-fluid" method="post" action="#">
   <!-- Header -->
   <div class="row" id="header">
     <div class="col">
@@ -55,14 +57,14 @@
         <input name="achievement-change-image-1" type="checkbox"> Changes Click Image?<br/>
         <input name="achievement-bigclick-img-1" type="file"><br/>
       </fieldset> 
-      <input type="button" value="Add New Achievement">
+      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
     </div>
 
     <!-- Store -->
     <div class="col-lg-4 col-12">
       <input name="storeTitle" class="title" type="text" value="Store Name"/><br/>
       <!-- a single item in a store -->
-      <fieldset class="store-item">
+      <fieldset class="store-item" id="base-store-item">
         <input name="store-item-icon-1" type="file"><br/>
         <input name="store-item-name-1" type="text" placeholder="Item Name"><br/>
         <input name="store-description-1" type="text" placeholder=Item Description"><br/>
@@ -72,8 +74,9 @@
 
         <input name="store-item-click-multipier-1" type="checkbox"> Each Auto Click Worth <input name="-store-item-autoclick-1" type="number" value="1.5"> times more <br/>
       </fieldset> 
-      <input type="button" value="Add New Store Item">
+      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item');">
     </div>
+    <input type="submit" value="Submit">
   </div>
 </form>
     <!-- Optional JavaScript -->
@@ -84,8 +87,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script>
-
-
+`   function
     </script>
   </body>
 </html>
