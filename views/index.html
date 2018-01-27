@@ -57,20 +57,20 @@
     </div>
 
     <!-- Achievements / Progress -->
-    <div class="col-lg-4 col-md-6 col-12">
+    <div id="achievementList" class="col-lg-4 col-md-6 col-12">
         <input name="game[achievementsTitle]" type="text" value="clicks"/><br/>
 
 
       <!-- an individual achievement -->
       <fieldset class="achievement">
-        <input name="achievement[0][image]" type="file"><br/>
-        <input name="achievement[0][name]" type="text" placeholder="Achievement Name"><br/>
-        <input name="achievement[0][message]" type="text" placeholder="Unlock Message"><br/>
-        <input name="achievement[0][clicksToUnlock]" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="achievement[0][changesBigImage]" type="checkbox"> Changes Click Image?<br/>
-        <input name="achievement[0][newBigImage]" type="file"><br/>
+        <input name="achievement[image]" type="file"><br/>
+        <input name="achievement[name]" type="text" placeholder="Achievement Name"><br/>
+        <input name="achievement[message]" type="text" placeholder="Unlock Message"><br/>
+        <input name="achievement[clicksToUnlock]" type="number" placeholder="10"> Clicks to Unlock<br/>
+        <input name="achievement[changesBigImage]" type="checkbox"> Changes Click Image?<br/>
+        <input name="achievement[newBigImage]" type="file"><br/>
       </fieldset> 
-      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item');">
+      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item', 'achievementList');">
     </div>
 
 <!--       title: "",
@@ -90,16 +90,16 @@
       <!-- a single item in a store -->
       <div id="store">
       <fieldset class="store-item" id="base-store-item">
-        <input name="store[0][image]" type="file"><br/>
-        <input name="store[0][title]" type="text" placeholder="Item Name"><br/>
-        <input name="store[0][description]" type="text" placeholder=Item Description"><br/>
-        <input name="store[0][cost]" type="text" placeholder="10">Cost (in clicks)<br/>
-        <input name="store[0][autoClick]" type="checkbox"> Auto Click <input name="store[0][passiveSecs]" type="number" value="10"> times every <input name="store[0][passiveSecs]" type="text" value="5"> seconds <br/> 
-        <input name="store[0][manualClick]" type="checkbox"> Each Manual (Mouse) Click Worth <input name="store[0][manualClickMultiplier]" type="text" value="1.5"> times more <br/>
+        <input name="storeimage" type="file"><br/>
+        <input name="title" type="text" placeholder="Item Name"><br/>
+        <input name="description" type="text" placeholder=Item Description"><br/>
+        <input name="cost" type="text" placeholder="10">Cost (in clicks)<br/>
+        <input name="autoClick" type="checkbox"> Auto Click <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
+        <input name="manualClick" type="checkbox"> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
 
       </fieldset> 
       </div>
-      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store-items');">
+      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
     </div>
     <input type="submit" value="Submit" id="playButton">
   </div>
