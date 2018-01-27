@@ -125,10 +125,10 @@ app.post('/createGame', function(req, res) {
     	var message = achievement['message'];
     	var achievementID = achievement['achievementID'];
 
-	    sql = 'INSERT INTO Achievements (gameID, name, image, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+	    sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
         + gameID + '\', \'' 
         + name + '\', \'' 
-        + image + '\', ' 
+        + achievementimage + '\', ' 
         + clicksToUnlock + '\', ' 
         + changesBigImage + '\', ' 
         + newBigImage + '\', ' 
@@ -140,24 +140,34 @@ app.post('/createGame', function(req, res) {
 	
 	}
 
-	var listItems = req.body['store'];
 	itemID = itemID + 1;
 
-	for(var item of listItems) {
+	var storeimageList = req.body['storeimage'];
+	var titleList = req.body['title'];
+	var costList = req.body['cost'];
+	var descriptionList = req.body['description'];
+	var costMultiplierList = req.body['costMultiplier'];
+	var passiveClicksList = req.body['passiveClicks'];
+	var passiveSecsList = req.body['passiveSecs'];
+	var manualClickMultiplierList = req.body['manualClickMultiplier'];
+	var autoClickList = req.body['autoClick'];
 
-    	var storeimage = item['storeimage'];
-    	var title = item['title'];
-    	var cost = item['cost'];
-    	var description = item['description'];
-    	var costMultiplier = item['costMultiplier'];
-    	var passiveClicks = item['passiveClicks'];
-    	var passiveSecs = item['passiveSecs'];
-    	var manualClickMultiplier = item['manualClickMultiplier'];
-    	var autoClick = item['autoClick'];
 
-    sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
+	for(var count in templist) {
+
+    	var storeimage = storeimageList[count];
+    	var title = titleList[count];
+    	var cost = costList[count];
+    	var description = descriptionList[count];
+    	var costMultiplier = costMultiplier[count];
+    	var passiveClicks = passiveClicks[count];
+    	var passiveSecs = passiveSecs[count];
+    	var manualClickMultiplier = manualClickMultiplierList[count];
+    	var autoClick = autoClickList[count];
+
+    sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
         + gameID + '\', \'' 
-        + image + '\', \'' 
+        + storeimage + '\', \'' 
         + title + '\', ' 
         + cost + '\', ' 
         + description + '\', ' 

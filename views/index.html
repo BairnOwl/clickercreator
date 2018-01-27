@@ -62,7 +62,7 @@
 
 
       <!-- an individual achievement -->
-      <fieldset class="achievement">
+      <fieldset id="achievement">
         <input name="achievementimage" type="file"><br/>
         <input name="name" type="text" placeholder="Achievement Name"><br/>
         <input name="message" type="text" placeholder="Unlock Message"><br/>
@@ -70,7 +70,7 @@
         <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
         <input name="newBigImage" type="file"><br/>
       </fieldset> 
-      <input type="button" value="Add New Achievement" onclick="cloneElement('base-store-item', 'achievementList');">
+      <input type="button" value="Add New Achievement" onclick="cloneElement('achievement', 'achievementList');">
     </div>
 
 
@@ -109,7 +109,7 @@
       function cloneElement(element, appendTo){
         var elmnt = document.getElementById(element);
         var cln = elmnt.cloneNode(true);
-         document.getElementById(appendTo).appendChild(cln);
+        document.getElementById(appendTo).appendChild(cln);
       }
     </script>
   </body>
