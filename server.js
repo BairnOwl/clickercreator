@@ -19,8 +19,20 @@ app.use(express.static(__dirname + '/views'));
 app.engine('html', engine.mustache);
 app.set('view engine', 'html');
 
+var gameID = 0;
+var achievementID = 0;
+var itemID = 0;
+
 app.get('*', function(request, response) {
     response.render('index.html');
+    var sql = 'SELECT count(gameID) FROM Game';
+    gameID = conn.query(sql); 
+
+    var sql = 'SELECT count(achievementID) FROM Achievements';
+    achievementID = conn.query(sql); 
+
+    var sql = 'SELECT count(itemID) FROM Store';
+    itemID = conn.query(sql); 
 });
 
 /* 
@@ -35,8 +47,7 @@ app.get('*', function(request, response) {
 			overrideIcon: int,
 			clickSFX: ""
 		}, 
-		achievements: {
-			achievementList: [
+		achievements: [ 
 				{
 					name: "",
 					image: "",
@@ -44,12 +55,11 @@ app.get('*', function(request, response) {
 					changesBigImage: int,
 					newBigImage: "",
 					message: ""
-				}
+				}, {}
 			]
 
 		},
-		store: {
-			storeList: [
+		store:  [
 				{
 					title: "",
 					image: "",
@@ -62,7 +72,7 @@ app.get('*', function(request, response) {
 					passiveClickMultiplier: int,
 				}
 			]
-		}
+		
 	}
 */
 
@@ -81,6 +91,7 @@ app.post('/', function(req, res) {
 
 	// write sql query here
 
+	gameID = gameID + 1;
 	//GAME
 	var sql = 'INSERT INTO Game (gameID, gameTitle, defaultImage, clickName, achievementsTitle, storeName, clickOverride, overrideIcon, clickSFX) VALUES (\'' 
         + gameID + '\', \'' 
@@ -96,9 +107,21 @@ app.post('/', function(req, res) {
     var q = conn.query(sql);
 
     // ACHIEVEMENTS
-    // for each achievement...
+    
+    var listAchievements = req.body['achievements'][0];
+    achievementID = achievementID + 1;
 
-    var sql = 'INSERT INTO Achievements (gameID, name, image, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+    for(var achievement of listAchievements) {
+
+    	var name = achievement['name'];
+    	var image = achievement['image'];
+    	var clicksToUnlock = achievement['clicksToUnlock'];
+    	var changesBigImage = achievement['changesBigImage'];
+    	var newBigImage = achievement['newBigImage'];
+    	var message = achievement['message'];
+    	var achievementID = achievement['achievementID'];
+
+	    sql = 'INSERT INTO Achievements (gameID, name, image, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
         + gameID + '\', \'' 
         + name + '\', \'' 
         + image + '\', ' 
@@ -108,9 +131,27 @@ app.post('/', function(req, res) {
         + message + '\', ' 
         +  achievementID + ')';
 
-    var q = conn.query(sql);
+    	q = conn.query(sql);
+    	achievementID = achievementID + 1;
+	
+	}
 
-    	var sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,passiveClickMultiplier,itemID) VALUES (\'' 
+	var listItems = req.body['store'];
+	itemID = itemID + 1;
+
+	for(var item of listItems) {
+
+    	var image = item['image'];
+    	var title = item['title'];
+    	var cost = item['cost'];
+    	var description = item['description'];
+    	var costMultiplier = item['costMultiplier'];
+    	var passiveClicks = item['passiveClicks'];
+    	var passiveSecs = item['passiveSecs'];
+    	var manualClickMultiplier = item['manualClickMultiplier'];
+    	var passiveClickMultiplier = item['passiveClickMultiplier'];
+
+    sql = 'INSERT INTO Store (gameID, image, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,passiveClickMultiplier,itemID) VALUES (\'' 
         + gameID + '\', \'' 
         + image + '\', \'' 
         + title + '\', ' 
@@ -123,8 +164,10 @@ app.post('/', function(req, res) {
         + passiveClickMultiplier + '\', '
         +  itemID + ')';
 
-    var q = conn.query(sql);
-
+    q = conn.query(sql);
+	itemID = itemID + 1;
+	}
+    
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
 
