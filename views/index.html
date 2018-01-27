@@ -46,13 +46,13 @@
   <div class="row">
   	<!-- Click Station -->
     <div class="col-lg-4 col-md-6 col-12">
-      <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
-      <input name="game[defaultImage]" value="a" />
-      <span class="game[num-clicks]">#</span> 
-      <input name="game[clickName]" type="text" value="b"/><br/>
-      <input name="game[clickOverride]" type="checkbox" value="1"/><br/>
-      <input name="game[overrideIcon]" type="checkbox" value="1"/><br/>
-      <input name="game[clickSFX]" type="text" value="c"/><br/>
+      <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker" required/><br/>
+      <input name="game[defaultImage]" value="a" required/>
+      <span class="game[num-clicks]" required>#</span> 
+      <input name="game[clickName]" type="text" value="b" required/><br/>
+      <input name="game[clickOverride]" type="checkbox" value="1" required/><br/>
+      <input name="game[overrideIcon]" type="checkbox" value="1" required/><br/>
+      <input name="game[clickSFX]" type="text" value="c" required/><br/>
       <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
 
@@ -63,12 +63,12 @@
 
       <!-- an individual achievement -->
       <fieldset id="achievement">
-        <input name="achievementimage" type="file"><br/>
-        <input name="name" type="text" placeholder="Achievement Name"><br/>
-        <input name="message" type="text" placeholder="Unlock Message"><br/>
-        <input name="clicksToUnlock" type="number" placeholder="10"> Clicks to Unlock<br/>
-        <input name="changesBigImage" type="checkbox"> Changes Click Image?<br/>
-        <input name="newBigImage" type="file"><br/>
+        <input name="achievementimage" type="file" required><br/>
+        <input name="name" type="text" placeholder="Achievement Name" required><br/>
+        <input name="message" type="text" placeholder="Unlock Message" required><br/>
+        <input name="clicksToUnlock" type="number" placeholder="10" required> Clicks to Unlock<br/>
+        <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
+        <input name="newBigImage" type="file" required><br/>
       </fieldset> 
       <input type="button" value="Add New Achievement" onclick="cloneElement('achievement', 'achievementList');">
     </div>
@@ -84,7 +84,7 @@
         <input name="title" type="text" placeholder="Item Name"><br/>
         <input name="description" type="text" placeholder=Item Description"><br/>
         <input name="cost" type="text" placeholder="10">Cost (in clicks)<br/>
-        <input name="autoClick" type="checkbox"> Auto Click
+        <input name="autoClick" value="0" type="checkbox"> Auto Click
         <input name="passiveSecs" type="number" value="10"> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
         <input name="manualClick" type="checkbox"> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
 

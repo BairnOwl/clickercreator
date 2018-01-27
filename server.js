@@ -152,7 +152,64 @@ app.post('/createGame', function(req, res) {
 	var newBigImageList = req.body['newBigImage'];
 	var messageList = req.body['message'];
 
-	for(var count in achievementImageList) {
+	var length = 0;
+	if(typeof nameList === "string") {
+		
+		var name = nameList;
+
+		var achievementimage = "";
+  //   	if (typeof achievementImageList == 'undefined') {
+		// 	achievementimage = "";
+		// } else {
+		// 	achievementimage = achievementImageList;
+		// }
+    	
+    	var clicksToUnlock = 0;
+    	if (typeof clicksToUnlockList == 'undefined') {
+			clicksToUnlock = 0;
+		} else {
+			clicksToUnlock = parseInt(clicksToUnlockList);
+		}
+
+
+    	var changesBigImage = 0;
+		if (typeof changesBigImageList == 'undefined') {
+			changesBigImage = 0;
+		} else {
+			changesBigImage = parseInt(changesBigImageList);
+		}
+
+    	var newBigImage = "";
+    	if (typeof newBigImageList == 'undefined') {
+			newBigImage = "";
+		} else {
+			newBigImage = newBigImageList;
+		}
+
+    	var message = messageList;
+    	var achievementID = achievementID;
+
+		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
+         + gameID + '\', \'' 
+         + name + '\', \'' 
+         + achievementimage + '\', \'' 
+         + clicksToUnlock + '\', \'' 
+         + changesBigImage + '\', \'' 
+         + newBigImage + '\', \'' 
+         + message + '\', \'' 
+         +  achievementID + '\')';
+
+     	console.log(sql); 
+     	q = conn.query(sql);
+
+     	achievementID = achievementID + 1;
+
+	} else {
+		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
+		console.log(typeof nameList);
+		length = nameList.length;
+
+		for(var count = 0; count < length; count++) {
 
     	var name = nameList[count];
 
@@ -204,6 +261,7 @@ app.post('/createGame', function(req, res) {
      	achievementID = achievementID + 1;
  	
  	}
+	}
  
 
 	// STORE
@@ -219,18 +277,20 @@ app.post('/createGame', function(req, res) {
  	var passiveSecsList = req.body['passiveSecs'];
  	var manualClickMultiplierList = req.body['manualClickMultiplier'];
  	var autoClickList = req.body['autoClick'];
+ 	var manualClickList = req.body['manualClick'];
 
- 	for(var count in storeimageList) {
- 
-     	var storeimage = storeimageList[count];
-     	var title = titleList[count];
-     	var cost = costList[count];
-     	var description = descriptionList[count];
-     	var costMultiplier = costMultiplier[count];
-     	var passiveClicks = passiveClicks[count];
-     	var passiveSecs = passiveSecs[count];
-     	var manualClickMultiplier = manualClickMultiplierList[count];
-     	var autoClick = autoClickList[count];
+	var lengthStore = 0;
+	if(typeof titleList === "string") {
+		var storeimage = storeimageList;
+     	var title = titleList;
+     	var cost = costList;
+     	var description = descriptionList;
+     	var costMultiplier = costMultiplier;
+     	var passiveClicks = passiveClicks;
+     	var passiveSecs = passiveSecs;
+     	var manualClickMultiplier = manualClickMultiplierList;
+     	var autoClick = autoClickList;
+     	var manualClick = manualClickList;
  
      sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
          + gameID + '\', \'' 
@@ -242,13 +302,48 @@ app.post('/createGame', function(req, res) {
          + passiveClicks + '\', ' 
          + passiveSecs + '\', '
          + manualClickMultiplier + '\', '
-         + itemID + '\', '
          + autoClick + '\', '
+         + itemID + '\', '
          +  manualClick + ')';
  
      	q = conn.query(sql);
  		itemID = itemID + 1;
+	} else {
+		lengthStore = titleList.length;
+
+		 	for(var count = 0; count < lengthStore; count++) {
+ 
+     	var storeimage = storeimageList[count];
+     	var title = titleList[count];
+     	var cost = costList[count];
+     	var description = descriptionList[count];
+     	var costMultiplier = costMultiplier[count];
+     	var passiveClicks = passiveClicks[count];
+     	var passiveSecs = passiveSecs[count];
+     	var manualClickMultiplier = manualClickMultiplierList[count];
+     	var autoClick = autoClickList[count];
+     	var manualClick = manualClickList[count];
+ 
+     sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
+         + gameID + '\', \'' 
+         + storeimage + '\', \'' 
+         + title + '\', \''  
+         + cost + '\', \''  
+         + description + '\', \''  
+         + costMultiplier + '\', \''  
+         + passiveClicks + '\', \''  
+         + passiveSecs + '\', \'' 
+         + manualClickMultiplier + '\', \'' 
+         + itemID + '\', \'' 
+         + autoClick + '\', \'' 
+         +  manualClick + '\')';
+ 
+     	q = conn.query(sql);
+ 		itemID = itemID + 1;
  	}
+	}
+
+
     
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
