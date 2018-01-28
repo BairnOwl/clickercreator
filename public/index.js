@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
 
-	var name = '';
+	var defaultImageId = '';
 
 	$('#playButton').on('click', function(e) {
 
@@ -8,17 +8,6 @@ window.addEventListener('load', function() {
 
 		// var form_data = new FormData($('#gameForm')[0]);
 		// console.log(form_data);
-
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-	        // console.log(reader.result + '->' + typeof reader.result)
-	        var defaultImage = reader.result;
-	        name = $('#defaultImage')[0]['files'][0].name;
-	        localStorage.setItem(name, defaultImage);
-	    };
-
-	    reader.readAsDataURL($('#defaultImage')[0]['files'][0]);
 
 		console.log($('#gameForm').serialize());
 
@@ -32,6 +21,17 @@ window.addEventListener('load', function() {
 			processData: false,
 			success: function (res) {
 				console.log(res);
+
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+			        // console.log(reader.result + '->' + typeof reader.result)
+			        var defaultImage = reader.result;
+			        // defaultImageId = $('#defaultImage')[0]['files'][0].name;
+			        localStorage.setItem(name, defaultImage);
+			    };
+
+			    reader.readAsDataURL($('#defaultImage')[0]['files'][0]);
 			}
 
 		});
