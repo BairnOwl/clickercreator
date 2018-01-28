@@ -15,7 +15,7 @@ window.addEventListener('load', function() {
 			url: '/createGame',
 			type: 'POST',
 			dataType: 'json',
-			data: form_data,
+			data: data,
 			processData: false,
 			success: function (res) {
 				console.log(res);

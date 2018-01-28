@@ -133,7 +133,7 @@ app.post('/createGame', function(req, res) {
 	}
 
 	console.log(gameTitle);
-	console.log(defaultImage);
+	// console.log(defaultImage);
 	console.log(clickName);
 	console.log(achievementsTitle);
 	console.log(storeName);
@@ -141,13 +141,13 @@ app.post('/createGame', function(req, res) {
 	console.log(overrideIcon);
 	console.log(clickSFX);
 
-	upload(defaultImage, res, function (err) { 
-        if (err) { 
-            console.log("Something went wrong!"); 
-        } 
-        console.log('successfully uploaded file');
-        // return res.end("File uploaded sucessfully!."); 
-    }); 
+	// upload(defaultImage, res, function (err) { 
+ //        if (err) { 
+ //            console.log("Something went wrong!"); 
+ //        } 
+ //        console.log('successfully uploaded file');
+ //        // return res.end("File uploaded sucessfully!."); 
+ //    }); 
 
 
 	gameID = gameID + 1;
@@ -155,7 +155,7 @@ app.post('/createGame', function(req, res) {
 	var sql = 'INSERT INTO Game (gameID, gameTitle, defaultImage, clickName, achievementsTitle, storeName, clickOverride, overrideIcon, clickSFX) VALUES (\'' 
         + gameID + '\', \'' 
         + gameTitle + '\', \'' 
-        + defaultImage + '\',\'' 
+        + '\',\'' 
         + clickName + '\',\'' 
         + achievementsTitle + '\',\'' 
         + storeName + '\',\'' 
@@ -189,14 +189,16 @@ app.post('/createGame', function(req, res) {
 		// } else {
 		// 	achievementimage = achievementImageList;
 		// }
+
     	
     	var clicksToUnlock = 0;
-    	if (typeof clicksToUnlockList == 'undefined') {
+    	if (typeof clicksToUnlockList == 'undefined' | !clicksToUnlockList) {
 			clicksToUnlock = 0;
 		} else {
 			clicksToUnlock = parseInt(clicksToUnlockList);
 		}
 
+		console.log('clicks to unlock ' + clicksToUnlockList);
 
     	var changesBigImage = 0;
 		if (typeof changesBigImageList == 'undefined') {
