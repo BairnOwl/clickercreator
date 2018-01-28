@@ -95,7 +95,7 @@ window.addEventListener('load', function() {
 		});
 	});
 
-	$('#mainImage').mousedown(pulse);
+	$('#big-image').mousedown(pulse);
 
 
 
@@ -124,12 +124,7 @@ window.addEventListener('load', function() {
 		passiveClicksPerSec *= multiplier;
 	}
 
-	// appends a clone of element to the end of appendTo
-      function cloneElement(element, appendTo){
-        var elmnt = document.getElementById(element);
-        var cln = elmnt.cloneNode(true);
-        document.getElementById(appendTo).appendChild(cln);
-      }
+
 
       function pulse(){
         clicks += manualClicks;
