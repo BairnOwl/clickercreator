@@ -44,7 +44,10 @@
 
       <!-- an individual achievement -->
       <fieldset id="achievement">
-        <input name="achievementimage" type="file" value="" required><br/>
+        <label class="fileContainer" >
+          <img src="yarn.png" />
+          <input name="achievementimage" type="file" value="" onchange="showimg(this)" required>
+        </label>
         <input name="name" type="text" placeholder="Achievement Name" required><br/>
         <input name="message" type="text" placeholder="Unlock Message" required><br/>
         <input name="clicksToUnlock" type="number" placeholder="10" required> Clicks to Unlock<br/>
@@ -58,12 +61,12 @@
     <div class="col-lg-4 col-md-6 col-12">
       <div id="big-clicker-container">
       
-      <div class="row">
+      <div class="row no-gutters" >
         <div class="col-12 col-lg-6 right">
           <span class="fancy-font" id="num-clicks">0</span>
         </div>
         <div class="col-12 col-lg-6 left" >
-          <input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="1"/>
+          <input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="clicks"/>
         </div>
       </div>
         <img src="defaultclick.png" onmousedown="pulse();" id="big-image" class="pointer">
@@ -137,9 +140,18 @@
           document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
         else
           document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
-      
-
-
+      function showimg(caller){
+      for (var i = 0; i < caller.files.length; i++) {  
+        var file = caller.files[i];
+        var img = document.createElement("img");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+             $(caller).prev("img").attr("src",img.src);
+        }
+        reader.readAsDataURL(file);
+    }
+}
     </script>
   </body>
 </html>

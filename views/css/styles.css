@@ -25,18 +25,24 @@ body {
 h1, h2, h3, .title, .game-title {
   font-family: 'Gorditas', cursive;
   text-align: center;
-  padding: 10px 0px;
+  padding: 5px 0px;
   color: white;
     text-shadow: 2px 2px 5px rgba(0,0,0,.2)
 }
 
 input {
-  border: 1px dashed gray;
+  border: 1px dashed transparent;
   max-width: 100%;
+}
+
+input:hover {
+
+  border: 1px dashed gray;
 }
 
 input#clicks{
   position: absolute;
+  padding: 5px 0px;
 }
 
 .title {
@@ -44,7 +50,6 @@ input#clicks{
   text-align: center;
   background-color: rgba(0,0,0,.2);
   background-size: auto 100%;
-  border: none;
   border-radius: 10px;
   margin-bottom: 10px;
   width: 100%;
@@ -55,7 +60,6 @@ input#clicks{
   text-align: center;
   background: transparent;
   background-size: auto 100%;
-  border: none;
   border-radius: 10px;
   margin-bottom: 0px;
   width: 100%;
@@ -115,4 +119,33 @@ img {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.075); opacity: .95; }
     100% { transform: scale(1); opacity: 1; }
+}
+
+.fileContainer {
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+.fileContainer img {
+  width:100%;
+  cursor: pointer;
+  border: 1px dashed transparent;
+
+}
+.fileContainer img:hover{
+  border: 1px dashed gray;
+
+}
+
+.fileContainer [type=file] {
+    display: block;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    text-align: right;
+    width: auto;
+    display: none;
+    cursor: pointer;
 }
