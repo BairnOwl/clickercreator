@@ -15,7 +15,7 @@ var Promise = require('promise');
 
 app.engine('html', engine.hogan); // tell Express to run .html files through Hogan
 app.set('views', __dirname + '/views'); // tell Express where to find templates
-app.use(express.static('public'));
+app.use(express.static('views'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));

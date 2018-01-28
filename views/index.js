@@ -99,8 +99,13 @@ $('.buyItem').click(purchase);
 function purchase(e) {
 
     var cost = $(this).prev().val();
+
+    console.log(cost);
+    clicks -= cost;
+
     var quantity = $(this).next().val();
     $(this).next().val(parseInt(quantity) + 1);
+    
 
     var advanced = $(this).next().next();
 

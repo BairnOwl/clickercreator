@@ -110,7 +110,7 @@
                     <input class="item-title" name="title" type="text" value="Item Name">
                     <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Description goes Here!</textarea>
                     <input class="item-descrption" hidden="hidden" name="description" type="text" value="Item Description" >
-                    <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)<br/>
+                    <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)
 
                     <input type=button class="buyItem" value="Buy">
                     <input class="itemQuantity" disabled type="number" value="0" >
@@ -150,8 +150,6 @@
     <script>
     function showimg(caller){
 
-
-
         for (var i = 0; i < caller.files.length; i++) {  
           var file = caller.files[i];
           var img = document.createElement("img");
@@ -169,12 +167,8 @@
 
   // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
-        var elmnt = document.getElementById(element);
-        var cln = elmnt.cloneNode(true);
-        document.getElementById(appendTo).appendChild(cln);
+        $('#' + element).clone(true, true).appendTo('#' + appendTo);
       }
-
-      
     </script>
   </body>
 </html>
