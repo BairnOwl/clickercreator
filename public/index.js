@@ -2,6 +2,9 @@ window.addEventListener('load', function() {
 
 	var defaultImageId = '';
 
+	var passiveClicksPerSec = 0;
+	var manualClicks = 1;
+
 	$('#playButton').on('click', function(e) {
 
 		 e.preventDefault();
@@ -45,8 +48,30 @@ window.addEventListener('load', function() {
     	$('#testImg').attr('src', dataImage);
 	});
 
+
+
 	function startGame(data) {
 		$('#gameForm').hide();
+
+		// for each item in store, append to store section
+
+		// for each achievement, append to achievements section
+	}
+
+	function addManualClicks(num) {
+		manualClicks += num;
+	}
+
+	function multiplyManualClicks(multiplier) {
+		manualClicks *= multiplier;
+	}
+
+	function addPassiveClicks(num, secs) {
+		passiveClicksPerSec += (num / secs);
+	}
+
+	function multiplyPassiveClicks(multiplier) {
+		passiveClicksPerSec *= multiplier;
 	}
 
 }, false);

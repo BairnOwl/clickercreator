@@ -490,9 +490,6 @@ app.post('/createGame', function(req, result) {
 		    
 	    }); 
     });
-
-    
-    //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
 
 
