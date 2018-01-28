@@ -11,6 +11,8 @@ var multer = require('multer');
 
 var engine = require('consolidate');
 
+var Promise = require('promise');
+
 app.engine('html', engine.hogan); // tell Express to run .html files through Hogan
 app.set('views', __dirname + '/views'); // tell Express where to find templates
 app.use(express.static('public'));
@@ -104,7 +106,7 @@ app.get('*', function(request, response) {
 */
 
 
-app.post('/createGame', function(req, res) {
+app.post('/createGame', function(req, result) {
 
 	// Game section
 
@@ -429,6 +431,31 @@ app.post('/createGame', function(req, res) {
  	}
 	}
 
+	// SEND BACK TO FRONT END:
+	sql = 'SELECT * FROM Game WHERE gameID = ' + gameID;
+ 	var ret = {};
+ 	conn.query(sql, function(err, res) {
+        game = res.rows;
+   
+        ret['game'] = game;
+
+        sql = 'SELECT * FROM Achievements WHERE gameID = ' + gameID;
+	 	conn.query(sql, function(err, res) {
+	        achievements = res.rows;
+	        
+	        ret['achievements'] = achievements;
+
+	        sql = 'SELECT * FROM Store WHERE gameID = ' + gameID;
+		 	conn.query(sql, function(err, res) {
+		        store = res.rows;
+		        ret['store'] = store;
+
+		        console.log(ret);
+		    	result.json(ret);
+		    }); 
+		    
+	    }); 
+    });
 
     
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});

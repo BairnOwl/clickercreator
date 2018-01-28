@@ -27,11 +27,13 @@ window.addEventListener('load', function() {
 				reader.onload = function (e) {
 			        // console.log(reader.result + '->' + typeof reader.result)
 			        var defaultImage = reader.result;
-			        // defaultImageId = $('#defaultImage')[0]['files'][0].name;
-			        localStorage.setItem(name, defaultImage);
+			        defaultImageId = res['game'][0]['gameId'];
+			        localStorage.setItem(defaultImageId, defaultImage);
 			    };
 
 			    reader.readAsDataURL($('#defaultImage')[0]['files'][0]);
+
+			    startGame(res);
 			}
 
 		});
@@ -42,5 +44,9 @@ window.addEventListener('load', function() {
 		console.log(dataImage);
     	$('#testImg').attr('src', dataImage);
 	});
+
+	function startGame(data) {
+		$('#gameForm').hide();
+	}
 
 }, false);
