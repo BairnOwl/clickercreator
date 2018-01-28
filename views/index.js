@@ -48,14 +48,16 @@ window.addEventListener('load', function() {
 
 
 function updateClicks(){
+  $.fn.reverse = [].reverse;
   $('#num-clicks').html(abbrNum(clicks,4));
-  $(".achievement" ).each(function( index ) {
+  $(".achievement" ).reverse().each(function( index ) {
     if (clicks > $(this).find('.clickstounlock').first().val()) {
       var bg =  $(this).find('.item-box').first();
-      bg.css('background-color', 'yellow');
+      bg.css('background-color', '#eee8aa');
       var got =  $(this).find('.item-title').first();
       var name = got.val();
-      alert('You got the achievement' + name + "!");
+      $('#header .game-title').first().val("Achievement unlocked: " + name);
+      return; // prevent from same achievement
     }
 });
   }
