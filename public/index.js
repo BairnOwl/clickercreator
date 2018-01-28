@@ -5,12 +5,19 @@ window.addEventListener('load', function() {
 	var passiveClicksPerSec = 0;
 	var manualClicks = 1;
 
+
 	var achievementList = [];
 	var unlockedAchievements = [];
 
 	var clicks = 0;
-      var isClicked = false;
+    var isClicked = false;
 
+	window.setInterval(function() {
+		if (passiveClicksPerSec > 0) {
+			clicks += passiveClicksPerSec;
+			$('#num-clicks').html(clicks);
+		}
+	}, 1000);
 
       function pulse(){
 
@@ -34,6 +41,7 @@ window.addEventListener('load', function() {
                            $(this).dequeue();
                        });
         }
+
 
 	$('#playButton').on('click', function(e) {
 
@@ -90,6 +98,9 @@ window.addEventListener('load', function() {
 		$(this).next().val(parseInt(quantity) + 1);
 
 		var advanced = $(this).next().next();
+
+		addPassiveClicks(advanced.children('input.passiveClicks').val(), advanced.children('input.passiveSecs').val());
+		multiplyManualClicks(advanced.children('input.manualClickMultiplier').val());
 	});
 
 
@@ -115,6 +126,8 @@ window.addEventListener('load', function() {
 		});
 	});
 
+	$('#mainImage').mousedown(pulse);
+
 
 
 	function startGame(data) {
@@ -130,6 +143,7 @@ window.addEventListener('load', function() {
 	}
 
 	function multiplyManualClicks(multiplier) {
+		console.log('multiply manual clilk ' + multiplier);
 		manualClicks *= multiplier;
 	}
 
@@ -140,5 +154,50 @@ window.addEventListener('load', function() {
 	function multiplyPassiveClicks(multiplier) {
 		passiveClicksPerSec *= multiplier;
 	}
+
+	// appends a clone of element to the end of appendTo
+      function cloneElement(element, appendTo){
+        var elmnt = document.getElementById(element);
+        var cln = elmnt.cloneNode(true);
+        document.getElementById(appendTo).appendChild(cln);
+      }
+
+      function pulse(){
+        clicks += manualClicks;
+        $('#num-clicks').html(clicks);
+        $('#big-image').clearQueue();
+        $('#big-image').addClass("transform-active")
+                       .delay(115)
+                       .queue(function() {
+                           $(this).removeClass("transform-active");
+                           $(this).dequeue();
+                       });
+        }
+
+        /*
+        if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
+        else
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
+      function showimg(caller){
+        for (var i = 0; i < caller.files.length; i++) {  
+          var file = caller.files[i];
+          var img = document.createElement("img");
+          var reader = new FileReader();
+          reader.onloadend = function() {
+               img.src = reader.result;
+               $(caller).prev("img").attr("src",img.src);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
+
+      var mode = "gamey";
+      $(document).ready(function(){
+        if (mode == "game") {
+        $("body").attr("id","game");
+          $("#gameForm :input").prop("disabled", true);
+        }
+    });
 
 }, false);
