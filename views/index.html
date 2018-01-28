@@ -27,7 +27,7 @@
         </div>
       </div>
 
-    <input type="button" class="toggleMode" onclick="toggleMode()" value="Switch Mode">
+    <input type="button" id="toggleModeButton" class="toggleMode" onclick="toggleMode()" value="Switch Mode">
       <!-- Header -->
       <div class="row" id="header">
         <div class="col">
@@ -174,7 +174,38 @@
       }
 
       function toggleMode(){
-        $('body').toggleClass('game');
+        console.log($('#gameForm').serialize());
+
+    var data = $('#gameForm').serialize();
+
+    $.ajax( {
+      url: '/createGame',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      processData: false,
+      success: function (res) {
+        //console.log(res);
+        achievementList = res['achievements'];
+        console.log("WOO!");
+        console.log(achievementList);
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+              // console.log(reader.result + '->' + typeof reader.result)
+              var defaultImage = reader.result;
+              defaultImageId = res['game'][0]['gameId'];
+              localStorage.setItem(defaultImageId, defaultImage);
+          };
+
+          reader.readAsDataURL($('#defaultImage')[0]['files'][0]);
+
+          startGame(res);
+      }
+
+    });
+    $('body').toggleClass('game');
       }
 
     function updatebigimg(caller){
