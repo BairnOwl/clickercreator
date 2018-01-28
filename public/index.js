@@ -187,7 +187,7 @@ window.addEventListener('load', function() {
         }
       }
 
-      var mode = "gamey";
+      var mode = "game";
       $(document).ready(function(){
         if (mode == "game") {
         $("body").attr("id","game");
