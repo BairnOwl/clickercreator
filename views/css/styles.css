@@ -85,6 +85,16 @@ input[type=text].title {
 
 }
 
+.item-box input[type=number].item-cost {
+  position: absolute;
+
+    color: white;
+    padding-left: 7px;
+    text-align: left;
+    left: -5px;
+    background: url('../wood.png');
+    background-size: 100px;
+}
 
 input[type=button], button {
   background: url("../white.png") rgba(0,0,0,.4);
@@ -244,7 +254,7 @@ img {
   display: inline-block;
 }
 
-#game .adcvanced {
+#game .advanced {
   display: none;
 }
 
@@ -252,19 +262,27 @@ img {
 
 /* Store */
 
-input[type="number"], input[type="text"], textarea {
+input[type="number"], input[type="text"] {
   font-family: 'Patrick Hand', cursive;
   color: rgba(0,0,0,.8);
   background: none;
   padding:0px;
 }
 
+textarea {
+  background: transparent;
+}
+
 .item-box {
   background: url("../white.png") rgba(255,255,255,.8);
-  padding: 10px 20px;
+  padding: 3px 15px 0px;
   box-shadow: 0px 0px 10px rgba(0,0,0,.3);
   border-radius: 10px;
   margin-bottom: 5px;
+}
+
+.item-box textarea {
+  overflow: hidden;
 }
 
 .item-box .item-title {

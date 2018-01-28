@@ -51,8 +51,8 @@
                   <div class=" item-box">
                     <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL">
                     <input class="item-title" name="name" type="text" value="Achievement Name" >
-                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Congradulations text goes Here!</textarea>
-                    <input class="item-descrption" hidden="hidden" name="message" type="text" value="Unlock Message" >
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-description">Congratulations text goes Here!</textarea>
+                    <input class="item-description" hidden="hidden" name="message" type="text" value="Unlock Message" >
                     <div class="advanced">
                     <input name="clicksToUnlock" type="number" value="10" > Clicks to Unlock<br/>
                     
@@ -108,8 +108,8 @@
                   <div class=" item-box">
                     <input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
                     <input class="item-title" name="title" type="text" value="Item Name">
-                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Description goes Here!</textarea>
-                    <input class="item-descrption" hidden="hidden" name="description" type="text" value="Item Description" >
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-description">Description goes Here!</textarea>
+                    <input class="item-description" hidden="hidden" name="description" type="text" value="Item Description" >
                     <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)
 
                     <input type=button class="buyItem" value="Buy">
@@ -167,6 +167,9 @@
 
   // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
+        if (element=='achievement') {
+          clicks+=10000;
+        }
         $('#' + element).clone(true, true).appendTo('#' + appendTo);
       }
     </script>

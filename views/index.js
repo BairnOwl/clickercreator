@@ -33,7 +33,6 @@ function abbrNum(number, decPlaces) {
       
       return number;
       }
-window.addEventListener('load', function() {
 
   var defaultImageId = '';
 
@@ -42,6 +41,9 @@ window.addEventListener('load', function() {
 
   var clicks = 0;
   var isClicked = false;
+
+window.addEventListener('load', function() {
+
 
   window.setInterval(function() {
     if (passiveClicksPerSec > 0) {
@@ -194,7 +196,7 @@ function purchase(e) {
         }
       }
 
-      var mode = "game";
+      var mode = "gam";
       $(document).ready(function(){
         if (mode == "game") {
         $("body").attr("id","game");
