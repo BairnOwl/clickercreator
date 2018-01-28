@@ -108,6 +108,8 @@ app.get('*', function(request, response) {
 
 app.post('/createGame', function(req, res) {
 
+	console.log('achievementID ' + achievementID);
+
 	// Game section
 
 	console.log(req.body);
@@ -231,8 +233,6 @@ app.post('/createGame', function(req, res) {
      	console.log(sql); 
      	q = conn.query(sql);
 
-     	achievementID = achievementID + 1;
-
 	} else {
 		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
 		console.log(typeof nameList);
@@ -272,7 +272,6 @@ app.post('/createGame', function(req, res) {
 		}
 
     	var message = messageList[count];
-    	var achievementID = achievementID;
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
@@ -281,7 +280,7 @@ app.post('/createGame', function(req, res) {
          + clicksToUnlock + '\', \'' 
          + changesBigImage + '\', \'' 
          + newBigImage + '\', \'' 
-         + message + '\', \'' 
+         + message + '\', \''
          +  achievementID + '\')';
 
      	console.log(sql); 
