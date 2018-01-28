@@ -50,10 +50,8 @@ app.get('*', function(request, response) {
 
     var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
     achievementID = conn.query(sql, function(err, res) {
-    	console.log("ACHIEVEMENTS ID:");
    
         achievementID = res.rows[0]['numAchievement'];
-        console.log(achievementID);
     }); 
 
     var sql = 'SELECT count(itemID) as numStore FROM Store';
@@ -108,8 +106,6 @@ app.get('*', function(request, response) {
 
 app.post('/createGame', function(req, res) {
 
-	console.log('achievementID ' + achievementID);
-
 	// Game section
 
 	console.log(req.body);
@@ -121,8 +117,16 @@ app.post('/createGame', function(req, res) {
 	var storeName = req.body['game']['storeName'];
 	var clickOverride = req.body['game']['clickOverride'];
 	var overrideIcon = req.body['game']['overrideIcon'];
-	var clickSFX = req.body['game']['clickSFX'];
+	
+	var clickSFX = "";
+	if (typeof clickSFX == 'undefined' || clickSFX == 'undefined') {
+		clickSFX = "";
+	} else {
+		clickSFX = req.body['game']['clickSFX'];
+	}
 
+	console.log("CLICK OVERRIDE");
+	console.log(clickOverride);
 	if (typeof clickOverride == 'undefined') {
 		clickOverride = 0;
 	} else {
@@ -135,14 +139,6 @@ app.post('/createGame', function(req, res) {
 		overrideIcon = parseInt(overrideIcon);
 	}
 
-	console.log(gameTitle);
-	// console.log(defaultImage);
-	console.log(clickName);
-	console.log(achievementsTitle);
-	console.log(storeName);
-	console.log(clickOverride);
-	console.log(overrideIcon);
-	console.log(clickSFX);
 
 	// upload(defaultImage, res, function (err) { 
  //        if (err) { 
@@ -218,7 +214,6 @@ app.post('/createGame', function(req, res) {
 
     	var message = messageList;
 
-    	console.log('achievementID ' + achievementID);
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
@@ -233,9 +228,8 @@ app.post('/createGame', function(req, res) {
      	console.log(sql); 
      	q = conn.query(sql);
 
+
 	} else {
-		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
-		console.log(typeof nameList);
 		length = nameList.length;
 
 		for(var count = 0; count < length; count++) {
