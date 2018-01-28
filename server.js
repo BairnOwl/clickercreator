@@ -429,7 +429,33 @@ app.post('/createGame', function(req, res) {
  	}
 	}
 
+	// SEND BACK TO FRONT END:
+	sql = 'SELECT * FROM Game WHERE gameID = ' + gameID;
+ 	var ret = "";
+ 	conn.query(sql, function(err, res) {
+        game = res.rows[0];
+        // console.log("WOOO!");
+        // console.log(game);
+        ret += game;
+    }).then(function() {
+    	console.log(ret);
+    });
 
+
+ 	sql = 'SELECT * FROM Achievements WHERE gameID = ' + gameID;
+ 	conn.query(sql, function(err, res) {
+        test = res.rows[0];
+        console.log(test);
+        ret += test;
+    }); 
+
+ 	sql = 'SELECT * FROM Store WHERE gameID = ' + gameID;
+ 	conn.query(sql, function(err, res) {
+        test = res.rows[0];
+        console.log(test);
+        ret += test;
+    }); 
+    console.log(ret);
     
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
