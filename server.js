@@ -5,6 +5,10 @@ var server = http.createServer(app);
 var anyDB = require('any-db');
 var conn = anyDB.createConnection('sqlite3://database.db');
 
+var path = require('path');
+var fs = require('fs');
+var multer = require('multer'); 
+
 var engine = require('consolidate');
 
 app.engine('html', engine.hogan); // tell Express to run .html files through Hogan
@@ -13,11 +17,24 @@ app.use(express.static('public'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+app.use(bodyParser({uploadDir:'/images'}));
 
 app.use(express.static(__dirname + '/views'));
 app.engine('html', engine.mustache);
 app.set('view engine', 'html');
+
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./Images");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+
+var upload = multer({ storage: Storage }).array("imgUploader", 3); 
 
 var gameID = 0;
 var achievementID = 0;
@@ -33,9 +50,9 @@ app.get('*', function(request, response) {
 
     var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
     achievementID = conn.query(sql, function(err, res) {
+   
         achievementID = res.rows[0]['numAchievement'];
-    });; 
-
+    }); 
 
     var sql = 'SELECT count(itemID) as numStore FROM Store';
     itemID = conn.query(sql, function(err, res) {
@@ -100,8 +117,16 @@ app.post('/createGame', function(req, res) {
 	var storeName = req.body['game']['storeName'];
 	var clickOverride = req.body['game']['clickOverride'];
 	var overrideIcon = req.body['game']['overrideIcon'];
-	var clickSFX = req.body['game']['clickSFX'];
+	
+	var clickSFX = "";
+	if (typeof clickSFX == 'undefined' || clickSFX == 'undefined') {
+		clickSFX = "";
+	} else {
+		clickSFX = req.body['game']['clickSFX'];
+	}
 
+	console.log("CLICK OVERRIDE");
+	console.log(clickOverride);
 	if (typeof clickOverride == 'undefined') {
 		clickOverride = 0;
 	} else {
@@ -114,14 +139,14 @@ app.post('/createGame', function(req, res) {
 		overrideIcon = parseInt(overrideIcon);
 	}
 
-	console.log(gameTitle);
-	console.log(defaultImage);
-	console.log(clickName);
-	console.log(achievementsTitle);
-	console.log(storeName);
-	console.log(clickOverride);
-	console.log(overrideIcon);
-	console.log(clickSFX);
+
+	// upload(defaultImage, res, function (err) { 
+ //        if (err) { 
+ //            console.log("Something went wrong!"); 
+ //        } 
+ //        console.log('successfully uploaded file');
+ //        // return res.end("File uploaded sucessfully!."); 
+ //    }); 
 
 
 	gameID = gameID + 1;
@@ -129,7 +154,7 @@ app.post('/createGame', function(req, res) {
 	var sql = 'INSERT INTO Game (gameID, gameTitle, defaultImage, clickName, achievementsTitle, storeName, clickOverride, overrideIcon, clickSFX) VALUES (\'' 
         + gameID + '\', \'' 
         + gameTitle + '\', \'' 
-        + defaultImage + '\',\'' 
+        + '\',\'' 
         + clickName + '\',\'' 
         + achievementsTitle + '\',\'' 
         + storeName + '\',\'' 
@@ -163,9 +188,10 @@ app.post('/createGame', function(req, res) {
 		// } else {
 		// 	achievementimage = achievementImageList;
 		// }
+
     	
     	var clicksToUnlock = 0;
-    	if (typeof clicksToUnlockList == 'undefined') {
+    	if (typeof clicksToUnlockList == 'undefined' | !clicksToUnlockList) {
 			clicksToUnlock = 0;
 		} else {
 			clicksToUnlock = parseInt(clicksToUnlockList);
@@ -187,7 +213,7 @@ app.post('/createGame', function(req, res) {
 		}
 
     	var message = messageList;
-    	var achievementID = achievementID;
+
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
@@ -202,11 +228,8 @@ app.post('/createGame', function(req, res) {
      	console.log(sql); 
      	q = conn.query(sql);
 
-     	achievementID = achievementID + 1;
 
 	} else {
-		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
-		console.log(typeof nameList);
 		length = nameList.length;
 
 		for(var count = 0; count < length; count++) {
@@ -243,7 +266,6 @@ app.post('/createGame', function(req, res) {
 		}
 
     	var message = messageList[count];
-    	var achievementID = achievementID;
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
@@ -252,7 +274,7 @@ app.post('/createGame', function(req, res) {
          + clicksToUnlock + '\', \'' 
          + changesBigImage + '\', \'' 
          + newBigImage + '\', \'' 
-         + message + '\', \'' 
+         + message + '\', \''
          +  achievementID + '\')';
 
      	console.log(sql); 
@@ -289,7 +311,7 @@ app.post('/createGame', function(req, res) {
 		}
 
      	var title = titleList;
-     	var cost = costList;
+     	var cost = parseInt(costList);
      	var description = descriptionList;
      	
      	var costMultiplier = 0;
@@ -306,8 +328,8 @@ app.post('/createGame', function(req, res) {
 			passiveClicks = parseInt(passiveClicksList);
 		}
      	
-     	var passiveSecs = passiveSecsList;
-     	var manualClickMultiplier = manualClickMultiplierList;
+     	var passiveSecs = parseInt(passiveSecsList);
+     	var manualClickMultiplier = parseInt(manualClickMultiplierList);
      	
      	var autoClick = 0;
     	if (typeof autoClickList == 'undefined') {
@@ -326,25 +348,24 @@ app.post('/createGame', function(req, res) {
      sql = 'INSERT INTO Store (gameID, storeimage, title, cost, description, costMultiplier, passiveClicks, passiveSecs, manualClickMultiplier,autoClick,itemID, manualClick) VALUES (\'' 
          + gameID + '\', \'' 
          + storeimage + '\', \'' 
-         + title + '\', ' 
-         + cost + '\', ' 
-         + description + '\', ' 
-         + costMultiplier + '\', ' 
-         + passiveClicks + '\', ' 
-         + passiveSecs + '\', '
-         + manualClickMultiplier + '\', '
-         + autoClick + '\', '
-         + itemID + '\', '
-         +  manualClick + ')';
+         + title + '\', \''  
+         + cost + '\', \''  
+         + description + '\', \''  
+         + costMultiplier + '\', \''  
+         + passiveClicks + '\', \''  
+         + passiveSecs + '\', \'' 
+         + manualClickMultiplier + '\', \'' 
+         + autoClick + '\', \'' 
+         + itemID + '\', \'' 
+         +  manualClick + '\')';
  
      	console.log(sql);
      	q = conn.query(sql);
- 		itemID = itemID + 1;
 
 	} else {
 		lengthStore = titleList.length;
 
-		 	for(var count = 0; count < lengthStore; count++) {
+		for(var count = 0; count < lengthStore; count++) {
  
      	var storeimage = "";
      	if (typeof storeimageList == 'undefined') {
@@ -354,7 +375,7 @@ app.post('/createGame', function(req, res) {
 		}
 
      	var title = titleList[count];
-     	var cost = costList[count];
+     	var cost = parseInt(costList[count]);
      	var description = descriptionList[count];
 
         var costMultiplier = 0;
@@ -372,8 +393,8 @@ app.post('/createGame', function(req, res) {
 		}
      	
 
-     	var passiveSecs = passiveSecsList[count];
-     	var manualClickMultiplier = manualClickMultiplierList[count];
+     	var passiveSecs = parseInt(passiveSecsList[count]);
+     	var manualClickMultiplier = parseInt(manualClickMultiplierList[count]);
      	
     	var autoClick = 0;
     	if (typeof autoClickList == 'undefined') {
