@@ -120,6 +120,18 @@ app.post('/createGame', function(req, result) {
 	var clickOverride = req.body['game']['clickOverride'];
 	var overrideIcon = req.body['game']['overrideIcon'];
 	
+	
+	// Pick URL over file upload. 
+	var defaultImageURL = req.body['game']['defaultImageURL'];
+	if(defaultImageURL != 'undefined' || defaultImageURL != '') {
+		defaultImage = defaultImageURL;
+	}
+
+	var overrideIconURL = req.body['game']['overrideIconURL'];
+	if(overrideIconURL != 'undefined' || overrideIconURL != '') {
+		overrideIcon = overrideIconURL;
+	}
+
 	var clickSFX = "";
 	if (typeof clickSFX == 'undefined' || clickSFX == 'undefined') {
 		clickSFX = "";
@@ -136,9 +148,9 @@ app.post('/createGame', function(req, result) {
 	}
 
 	if (typeof overrideIcon == 'undefined') {
-		overrideIcon = 0;
+		overrideIcon = "";
 	} else {
-		overrideIcon = parseInt(overrideIcon);
+		overrideIcon = overrideIcon;
 	}
 
 
@@ -185,11 +197,16 @@ app.post('/createGame', function(req, result) {
 		var name = nameList;
 
 		var achievementimage = "";
-  //   	if (typeof achievementImageList == 'undefined') {
-		// 	achievementimage = "";
-		// } else {
-		// 	achievementimage = achievementImageList;
-		// }
+    	if (typeof achievementImageList == 'undefined') {
+			achievementimage = "";
+		} else {
+			achievementimage = achievementImageList;
+		}
+
+		var achievementimageURL = req.body['achievementimageURL'];
+		if(achievementimageURL != "" && achievementimageURL != 'undefined') {
+			achievementimage = achievementimageURL;
+		}
 
     	
     	var clicksToUnlock = 0;
@@ -200,18 +217,25 @@ app.post('/createGame', function(req, result) {
 		}
 
 
-    	var changesBigImage = 0;
+    	var changesBigImage = "";
 		if (typeof changesBigImageList == 'undefined') {
-			changesBigImage = 0;
+			changesBigImage = "";
 		} else {
-			changesBigImage = parseInt(changesBigImageList);
+			changesBigImage = changesBigImageList;
 		}
+
+
 
     	var newBigImage = "";
     	if (typeof newBigImageList == 'undefined') {
 			newBigImage = "";
 		} else {
 			newBigImage = newBigImageList;
+		}
+
+		var newBigImageURL = req.body['newBigImageURL'];
+		if(newBigImageURL != "" && newBigImage != 'undefined') {
+			newBigImage = newBigImageURL;
 		}
 
     	var message = messageList;
@@ -239,11 +263,16 @@ app.post('/createGame', function(req, result) {
     	var name = nameList[count];
 
 		var achievementimage = "";
-  //   	if (typeof achievementImageList == 'undefined') {
-		// 	achievementimage = "";
-		// } else {
-		// 	achievementimage = achievementImageList[count];
-		// }
+    	if (typeof achievementImageList == 'undefined') {
+			achievementimage = "";
+		} else {
+			achievementimage = achievementImageList[count];
+		}
+
+		var achievementimageURL = req.body['achievementimageURL'][count];
+		if(achievementimageURL != "" && achievementimageURL != 'undefined') {
+			achievementimage = achievementimageURL;
+		}
     	
     	var clicksToUnlock = 0;
     	if (typeof clicksToUnlockList == 'undefined') {
@@ -265,6 +294,11 @@ app.post('/createGame', function(req, result) {
 			newBigImage = "";
 		} else {
 			newBigImage = newBigImageList[count];
+		}
+
+		var newBigImageURL = req.body['newBigImageURL'][count];
+		if(newBigImageURL != "" && newBigImage != 'undefined') {
+			newBigImage = newBigImageURL;
 		}
 
     	var message = messageList[count];
