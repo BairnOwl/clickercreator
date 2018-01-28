@@ -21,6 +21,7 @@ window.addEventListener('load', function() {
 
       function pulse(){
 
+      	console.log(achievementList);
           for(a in achievementList) {
           	if(clicks == a.clicksToUnlock && !unlockedAchievements.includes(a.name)) {
           		var dataImage = localStorage.getItem(name);
@@ -43,9 +44,10 @@ window.addEventListener('load', function() {
         }
 
 
-	$('#playButton').on('click', function(e) {
+	$('#toggleModeButton').on('click', function(e) {
 
 		 e.preventDefault();
+		 console.log("It's working...");
 
 		// var form_data = new FormData($('#gameForm')[0]);
 		// console.log(form_data);
@@ -81,6 +83,7 @@ window.addEventListener('load', function() {
 			}
 
 		});
+		$('body').toggleClass('game');
 	});
 
 	$('#testButton').on('click', function(e) {
