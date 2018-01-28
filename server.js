@@ -231,7 +231,6 @@ app.post('/createGame', function(req, res) {
      	console.log(sql); 
      	q = conn.query(sql);
 
-     	achievementID = achievementID + 1;
 
 	} else {
 		console.log("NOT A STRING. WHAT U DOIN FRIENDO???");
@@ -368,7 +367,6 @@ app.post('/createGame', function(req, res) {
  
      	console.log(sql);
      	q = conn.query(sql);
- 		itemID = itemID + 1;
 
 	} else {
 		lengthStore = titleList.length;
