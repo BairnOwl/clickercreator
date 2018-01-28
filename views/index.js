@@ -42,13 +42,18 @@ function abbrNum(number, decPlaces) {
   var clicks = 0;
   var isClicked = false;
 
+
 window.addEventListener('load', function() {
 
+function updateClicks(){
+
+  $('#num-clicks').html(abbrNum(clicks,4));
+}
 
   window.setInterval(function() {
     if (passiveClicksPerSec > 0) {
       clicks += passiveClicksPerSec;
-      $('#num-clicks').html(clicks);
+        updateClicks();
     }
   }, 1000);
 
@@ -102,8 +107,13 @@ function purchase(e) {
 
     var cost = $(this).prev().val();
 
-    console.log(cost);
+    var canBuy = clicks - cost;
+    if (canBuy < 0)
+      return;
+
     clicks -= cost;
+
+        updateClicks();
 
     var quantity = $(this).next().val();
     $(this).next().val(parseInt(quantity) + 1);
@@ -167,8 +177,9 @@ function purchase(e) {
   }
 
       function pulse(){
+
         clicks += manualClicks;
-        $('#num-clicks').html(abbrNum(clicks,4));
+        updateClicks();
         $('#big-image').clearQueue();
         $('#big-image').addClass("transform-active")
                        .delay(115)
@@ -196,10 +207,10 @@ function purchase(e) {
         }
       }
 
-      var mode = "gam";
+      var mode = "gme";
       $(document).ready(function(){
         if (mode == "game") {
-        $("body").attr("id","game");
+        $("body").attr("class","game");
 
           //$("#gameForm :input").prop("disabled", true);
         }

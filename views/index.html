@@ -26,10 +26,12 @@
           <div class="cloud x5"></div>
         </div>
       </div>
+
+    <input type="button" class="toggleMode" onclick="toggleMode()" value="Switch Mode">
       <!-- Header -->
       <div class="row" id="header">
         <div class="col">
-          <input name="game[gameTitle]" class="game-title" type="text" value="Cookie Clicker"/><br/>
+          <input name="game[gameTitle]" class="game-title" type="text" value="Demo Clicker: Hatch Pinko!"/><br/>
         </div>
       </div>
       <!-- Main Content -->
@@ -50,13 +52,14 @@
                 <div class="col-12 col-lg-9" >
                   <div class=" item-box">
                     <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL">
-                    <input class="item-title" name="name" type="text" value="Achievement Name" >
-                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-description">Congratulations text goes Here!</textarea>
-                    <input class="item-description" hidden="hidden" name="message" type="text" value="Unlock Message" >
+                    <input class="item-title" name="name" type="text" value="The Golden Egg" >
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-description">The Egg is your Achievement. The Egg is your gift.</textarea>
+                    <input class="item-description" hidden  name="message" type="text" value="Unlock Message" >
                     <div class="advanced">
-                    <input name="clicksToUnlock" type="number" value="10" > Clicks to Unlock<br/>
+                      Clicks to Unlock:
+                      <input name="clicksToUnlock" type="number" value="10" ><br/>
                     
-                      Changes Big Image to:<br/>
+                      Changes Big Image to:
                       <label class="fileContainer" style="max-height: 100px">
                       <img src="defaultclick.png" style="height:100px;width:100px;" />
                       <input name="newBigImage" type="file" value="" onchange="showimg(this)" >
@@ -68,7 +71,7 @@
               </div>
             </fieldset>
           </div>
-        <input type="button" value="Add Achievement" onclick="cloneElement('achievement','achievementList');">
+        <input type="button" class="hidegame" value="Add Achievement" onclick="cloneElement('achievement','achievementList');">
         </div>
         <!-- Click Station -->
         <div class="col-lg-4 col-md-6 col-12">
@@ -83,12 +86,17 @@
             </div>
             <img src="defaultclick.png" id="big-image" class="pointer">
           </div>
-          <input name="game[defaultImageURL]" type="text" placeholder="Default Image URL" value="" /> <br/>
-          <input name="game[defaultImage]" id="defaultImage"   type="file" value="" /> <br/>
-          <input name="game[clickOverride]" type="checkbox" value="1"/>Override default click icon?<br/>
-          <input name="game[overrideIcon]" type="file" value=""/><br/>
-          <input name="game[overrideIconURL]" type="text" value="override Icon URL" value="" /> <br/>
-          <input name="game[clickSFX]" type="file" value=""/><br/>
+          <input name="game[defaultImageURL]" hidden type="text" placeholder="Default Image URL" value="" />
+          <div class='item-box hidegame' style="text-align:center;
+  background: url('white.png') rgba(180,180,180,.8);">
+          <label  class="fileContainer" style="padding: 10px 0px 0px;max-height: 100px">
+            <span class="editable">Change Big Clicker Image</span>
+            <input name="game[defaultImage]" class="hide" id="defaultImage" onchange="showimg(this);updatebigimg(this);"  type="file" value="" /> 
+          </label>
+        </div>
+          <input hidden name="game[overrideIcon]" type="file" value=""/>
+          <input hidden name="game[overrideIconURL]" type="text" value="override Icon URL" value="" />
+          <input hidden name="game[clickSFX]" type="file" value=""/>
           <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
         </div>
         <!-- Store -->
@@ -107,32 +115,35 @@
                 <div class="col-12 col-lg-9" >
                   <div class=" item-box">
                     <input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
-                    <input class="item-title" name="title" type="text" value="Item Name">
-                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-description">Description goes Here!</textarea>
-                    <input class="item-description" hidden="hidden" name="description" type="text" value="Item Description" >
-                    <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)
+                    <input class="item-title" name="title" type="text" value="Yarn Ball">
+                    <textarea width="80%" onchange="$(this).next().attr('value',this.value);" class="item-description">Pinko will accidentally pet himself 2x every second playing with this fun knitting accessory.</textarea>
+                    <input class="item-description" hidden name="description" type="text" value="Item Description" >
 
-                    <input type=button class="buyItem" value="Buy">
+                    <input class="item-cost" name="cost" onchange="$(this).next().attr('value','Buy for (' + abbrNum(this.value,1) + " " + $('#clicks').val()+ ')');" type="number" value="50" >
+
+                    <input type=button class="buyItem" value="Buy for (50 clicks)">
                     <input class="itemQuantity" disabled type="number" value="0" >
 
                     <div class="advanced">
                      
-                      Auto Clicks
-                       <input name="passiveClicks" class="passiveClicks" type="number" value="10" > times <br/>every <input name="passiveSecs" class="passiveSecs" type="number" value="5"> Mouse Clicks worth<br/> <input name="manualClickMultiplier" class="manualClickMultiplier" type="number" value="1.5">x times more 
+                       Passive Clicks/Second:<br>
+                       <input name="passiveClicks" class="passiveClicks" type="number" value="2" >
+                       <input name="passiveSecs" class="passiveSecs" type="number" hidden value="1"><br>
+                        Mouse Click Multiplier:<br/> <input name="manualClickMultiplier" class="manualClickMultiplier" type="number" value="1">
                     </div>
                   </div>
                 </div>
               </div>
           </fieldset> 
         </div>
-        <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
+        <input type="button" class="hidegame" value="Add Store Item" onclick="cloneElement('base-store-item','store');">
       </div>
     </div>
-    <input type="submit" value="Submit" id="playButton">
+    <input hidden type="submit" value="Submit" id="playButton">
   </div>
 </form>
 
-<form class="container" method="post" id="loadGameForm">
+<form style="display:none;" class="container" method="post" id="loadGameForm">
   <input type="text" name="inputID" placeholder="Game ID" id="inputID">
    <input type="submit" value="Load Game" id="loadGame">
 </form>
@@ -162,15 +173,27 @@
         }
       }
 
+      function toggleMode(){
+        $('body').toggleClass('game');
+      }
 
+    function updatebigimg(caller){
 
+        for (var i = 0; i < caller.files.length; i++) {  
+          var file = caller.files[i];
+          var img = document.createElement("img");
+          var reader = new FileReader();
+          reader.onloadend = function() {
+               img.src = reader.result;
+               $("#big-image").attr("src",img.src);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
 
   // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
-        if (element=='achievement') {
-          clicks+=10000;
-        }
-        $('#' + element).clone(true, true).appendTo('#' + appendTo);
+            $('#' + element).clone(true, true).appendTo('#' + appendTo);
       }
     </script>
   </body>
