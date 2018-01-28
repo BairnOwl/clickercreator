@@ -106,6 +106,16 @@ input[type=button], button {
 
 }
 
+input[type=submit], button {
+  background: url("../white.png") rgba(0,0,0,.4);
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: 'Patrick Hand',cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+
+}
+
 input[type=text].game-title {
   font-size: 2.2em;
   text-align: center;
