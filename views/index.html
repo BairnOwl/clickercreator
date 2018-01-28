@@ -162,9 +162,7 @@
 
   // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
-        var elmnt = document.getElementById(element);
-        var cln = elmnt.cloneNode(true);
-        document.getElementById(appendTo).appendChild(cln);
+        $('#' + element).clone(true, true).appendTo('#' + appendTo);
       }
     </script>
   </body>
