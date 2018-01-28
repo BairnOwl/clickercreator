@@ -32,9 +32,9 @@
       </div>
       <input name="game[defaultImage]" type="file" required/> <br/>
       <span class="num-clicks">#</span> of <input name="game[clickName]" type="text" value="clicks"/><br/>
-      <input name="game[clickOverride]" type="checkbox" value="clicks"/>Override default click icon?<br/>
-      <input name="game[overrideIcon]" type="file" value="clicks"/><br/>
-      <input name="game[clickSFX]" type="file" value="clicks"/><br/>
+      <input name="game[clickOverride]" type="checkbox" value="1"/>Override default click icon?<br/>
+      <input name="game[overrideIcon]" type="file" value=""/><br/>
+      <input name="game[clickSFX]" type="file" value="" required/><br/>
 
       <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
     </div>
@@ -50,7 +50,7 @@
         <input name="name" type="text" placeholder="Achievement Name" required><br/>
         <input name="message" type="text" placeholder="Unlock Message" required><br/>
         <input name="clicksToUnlock" type="number" placeholder="10" required> Clicks to Unlock<br/>
-        <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
+        <input name="changesBigImage" value="1" type="checkbox" required> Changes Click Image?<br/>
         <input name="newBigImage" type="file" required><br/>
       </fieldset> 
       <input type="button" value="Add New Achievement" onclick="cloneElement('achievement', 'achievementList');">
@@ -67,9 +67,9 @@
         <input name="title" type="text" placeholder="Item Name"><br/>
         <input name="description" type="text" placeholder="Item Description" required><br/>
         <input name="cost" type="text" placeholder="10" required>Cost (in clicks)<br/>
-        <input name="autoClick" value="0" type="checkbox" required> Auto Click
+        <input name="autoClick" value="1" type="checkbox" required> Auto Click
         <input name="passiveSecs" type="number" value="10" required> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
-        <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
+        <input name="manualClick" value="1" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
 
       </fieldset> 
       </div>
