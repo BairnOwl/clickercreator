@@ -32,13 +32,12 @@ input[type="text"].game-title {
     text-shadow: 2px 2px 5px rgba(0,0,0,.2)
 }
 
-input {
+input, textarea {
   border: 1px dashed transparent;
   max-width: 100%;
 }
 
-input:hover {
-
+input:hover, textarea:hover {
   border: 1px dashed gray;
 }
 
@@ -131,8 +130,8 @@ img {
     overflow: hidden;
     display: inline-block;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+  min-height:100%;
+  min-width:100%;
 }
 
 .fileContainer img {
@@ -168,9 +167,6 @@ img {
 
 }
 
-.achievement {
-  display: inline-block;
-}
 
 input[type=button] {
   cursor: pointer;
@@ -197,9 +193,41 @@ input[type=button] {
 
 /* Store */
 
-input[type="number"], input[type="text"] {
+input[type="number"], input[type="text"], textarea {
   font-family: 'Gorditas', cursive;
-  color: black;
+  color: rgba(0,0,0,.8);
   background: none;
-
+  padding:0px;
 }
+
+.item-box {
+  background: rgba(255,255,255,.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.item-box .item-title {
+  font-size: 1.2em;
+}
+
+
+.item-box .item-descrption {
+  width: 100%;
+  font-family: 'Open Sans', cursive;
+  font-size: .85em;
+  height: 2.2em;
+  line-height: .975;
+  resize: none;
+}
+
+.item-box input[type=number] {
+  width:150px;
+  display: inline;
+  text-align: center;
+}
+
+textarea:active {
+  -webkit-appearance:none;
+  border: 1px solid transparent;
+}
+

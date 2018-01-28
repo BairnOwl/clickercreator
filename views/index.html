@@ -1,131 +1,125 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <!--  meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/cloud.css">
-
     <title>Clicker Creator: Make your own clicker game!</title>
   </head>
   <body>
-
-<form class="container-fluid" method="post" id="gameForm">
-
-<div class="row" id="clouds">
-  <div class="col-12">
-  <div class="cloud x1"></div>
-  <!-- Time for multiple clouds to dance around -->
-  <div class="cloud x2"></div>
-  <div class="cloud x3"></div>
-  <div class="cloud x4"></div>
-  <div class="cloud x5"></div>
-</div>
-</div>
-
-  <!-- Header -->
-  <div class="row" id="header">
-    <div class="col">
-      <input name="game[gameTitle]" class="game-title" type="text" value="Cookie Clicker"/><br/>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="row">
-
-    <!-- Achievements / Progress -->
-    <div id="achievements" class="col-lg-4 col-md-6 col-12">
-        <input name="game[achievementsTitle]" class="title" type="text" value="Achievements"/><br/>
-
-      <div id="achievementList">
-      <!-- an individual achievement -->
-      <fieldset class="achievement" id="achievement">
-        <label class="fileContainer" >
-          <img src="guinea.png" />
-          <input name="achievementimage" type="file" value="" onchange="showimg(this)" required>
-        </label>
-          <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL"><br/>
-          <input name="name" type="text" value="Achievement Name" required><br/>
-          <input id="clicksToUnlock" name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
-          <div class="advanced">
-          <input name="message" type="text" value="Unlock Message" required><br/>
-          <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
-          <label class="fileContainer" >
-            <img src="defaultclick.png" />
-            <input name="newBigImage" type="file" value="" onchange="showimg(this)" required>
-          </label>
-          <input name="newBigImageURL" type="text" value="" value="Click Image URL" required><br/>
-      </div>
-      </fieldset> 
-      </div>
-      <input type="button" value="+" class="add" onclick="cloneElement('achievement', 'achievementList');">
-    </div>
-
-  	<!-- Click Station -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div id="big-clicker-container">
-      
-      <div class="row no-gutters" >
-        <div class="col-12 col-lg-6 right">
-          <span class="fancy-font" id="num-clicks">0</span>
-        </div>
-        <div class="col-12 col-lg-6 left" >
-          <input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="clicks"/>
+    <form class="container-fluid" method="post" id="gameForm">
+      <div class="row" id="clouds">
+        <div class="col-12">
+          <div class="cloud x1"></div>
+          <!-- Time for multiple clouds to dance around -->
+          <div class="cloud x2"></div>
+          <div class="cloud x3"></div>
+          <div class="cloud x4"></div>
+          <div class="cloud x5"></div>
         </div>
       </div>
-        <img src="defaultclick.png" id="big-image" class="pointer">
+      <!-- Header -->
+      <div class="row" id="header">
+        <div class="col">
+          <input name="game[gameTitle]" class="game-title" type="text" value="Cookie Clicker"/><br/>
+        </div>
       </div>
-
-      <input name="game[defaultImageURL]" type="text" placeholder="Default Image URL" value="" required/> <br/>
-      <input name="game[defaultImage]" id="defaultImage"  type="file" value="" required/> <br/>
-      <input name="game[clickOverride]" type="checkbox" value="1"/>Override default click icon?<br/>
-      <input name="game[overrideIcon]" type="file" value=""/><br/>
-      <input name="game[overrideIconURL]" type="text" value="override Icon URL" value="" required/> <br/>
-      <input name="game[clickSFX]" type="file" value=""/><br/>
-
-
-
-      <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
-    </div>
-
-    <!-- Store -->
-    <div class="col-lg-4 col-12">
-      <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
-      <!-- a single item in a store -->
-      <div id="store">
+      <!-- Main Content -->
       <div class="row">
-        <fieldset class="store-item" id="base-store-item">
-          <div class="col-6">
-          <label class="fileContainer" >
-            <img src="yarn.png" />
-            <input name="storeimage" type="file" value="" onchange="showimg(this)" required>
-          </label>
+        <!-- Achievements / Progress -->
+        <div id="achievements" class="col-lg-4 col-md-6 col-12">
+          <input name="game[achievementsTitle]" class="title" type="text" value="Achievements"/>
+          <div id="achievementList">
+            <!-- an individual achievement -->
+            <fieldset class="achievement" id="achievement">
+              <div class="row no-gutters" >
+                <div class="col-12 col-lg-3">
+                  <label class="fileContainer" >
+                  <img src="guinea.png" />
+                  <input name="achievementimage" type="file" value="" onchange="showimg(this)" >
+                  </label>
+                </div>
+                <div class="col-12 col-lg-9" >
+                  <div class=" item-box">
+                    <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL">
+                    <input class="item-title" name="name" type="text" value="Achievement Name" >
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Description goes Here!</textarea>
+                    <input class="item-descrption" hidden="hidden" name="message" type="text" value="Unlock Message" >
+                    <input name="clicksToUnlock" type="number" value="10" > Clicks to Unlock<br/>
+                    <div class="advanced">
+                      <input name="changesBigImage" value="0" type="checkbox" > Changes Click Image?<br/>
+                      <label class="fileContainer" >
+                      <img src="defaultclick.png" />
+                      <input name="newBigImage" type="file" value="" onchange="showimg(this)" >
+                      </label>
+                      <input name="newBigImageURL" type="text" value="" value="Click Image URL" >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
           </div>
-          <div class="col-6">
-            <input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
-              <input name="title" type="text" value="Item Name">
-              <input name="description" type="text" value="Item Description" required>
-              <input name="cost" type="text" value="10" required>Cost (in clicks)
-
-              <button class="buyItem">Buy</button>
-
-              <input class="itemQuantity" type="number" value="0" disabled />
-            
-            <div class="advanced">
-              <input name="autoClick" value="0" type="checkbox" required> Auto Click
-              <input name="passiveClicks" class="passiveClicks" type="number" value="10" required> times every <input name="passiveSecs" class="passiveSecs" type="text" value="5"> seconds <br/> 
-              <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" class="manualClickMultiplier" type="text" value="1.5"> times more 
+        </div>
+        <!-- Click Station -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div id="big-clicker-container">
+            <div class="row no-gutters" >
+              <div class="col-12 col-lg-6 right">
+                <span class="fancy-font" id="num-clicks">0</span>
+              </div>
+              <div class="col-12 col-lg-6 left" >
+                <input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="clicks"/>
               </div>
             </div>
-
+            <img src="defaultclick.png" id="big-image" class="pointer">
+          </div>
+          <input name="game[defaultImageURL]" type="text" placeholder="Default Image URL" value="" /> <br/>
+          <input name="game[defaultImage]" id="defaultImage"   type="file" value="" /> <br/>
+          <input name="game[clickOverride]" type="checkbox" value="1"/>Override default click icon?<br/>
+          <input name="game[overrideIcon]" type="file" value=""/><br/>
+          <input name="game[overrideIconURL]" type="text" value="override Icon URL" value="" /> <br/>
+          <input name="game[clickSFX]" type="file" value=""/><br/>
+          <!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
         </div>
+        <!-- Store -->
+        <div class="col-lg-4 col-12">
+          <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
+          <!-- a single item in a store -->
+          <div id="store">
+            <fieldset class="store-item" id="base-store-item">
+              <div class="row no-gutters" >
+                <div class="col-12 col-lg-3">
+                  <label class="fileContainer" >
+                    <img src="yarn.png" />
+                    <input name="storeimage" type="file" value="" onchange="showimg(this)" >
+                  </label>
+                </div>
+                <div class="col-12 col-lg-9" >
+                  <div class=" item-box">
+                    <input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
+                    <input class="item-title" name="title" type="text" value="Item Name">
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Description goes Here!</textarea>
+                    <input class="item-descrption" hidden="hidden" name="description" type="text" value="Item Description" >
+                    <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)
 
+                    <button class="buyItem">Buy</button>
+                    <input class="itemQuantity" disabled type="number" value="0" >
 
-        </fieldset> 
+                    <div class="advanced">
+                     
+                      Auto Clicks
+                       <input name="passiveClicks" class="passiveClicks" type="number" value="10" > times <br/>every <input name="passiveSecs" class="passiveSecs" type="number" value="5"> Mouse Clicks worth<br/> <input name="manualClickMultiplier" class="manualClickMultiplier" type="number" value="1.5">x times more 
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </fieldset> 
+        </div>
+        <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
       </div>
       <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
     </div>
@@ -146,26 +140,11 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
+    function showimg(caller){
 
-      // appends a clone of element to the end of appendTo
-      function cloneElement(element, appendTo){
-        var elmnt = document.getElementById(element);
-        var cln = elmnt.cloneNode(true);
-        document.getElementById(appendTo).appendChild(cln);
-      }
-
-      
-
-        /*
-        if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")
-          document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
-        else
-          document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
-      function showimg(caller){
         for (var i = 0; i < caller.files.length; i++) {  
           var file = caller.files[i];
           var img = document.createElement("img");
@@ -177,14 +156,16 @@
           reader.readAsDataURL(file);
         }
       }
-      
-      var mode = "gamey";
-      $(document).ready(function(){
-        if (mode == "game") {
-        $("body").attr("id","game");
-          $("#gameForm :input").prop("disabled", true);
-        }
-    });
+
+
+
+
+  // appends a clone of element to the end of appendTo
+      function cloneElement(element, appendTo){
+        var elmnt = document.getElementById(element);
+        var cln = elmnt.cloneNode(true);
+        document.getElementById(appendTo).appendChild(cln);
+      }
     </script>
   </body>
 </html>
