@@ -50,7 +50,7 @@
         </label>
           <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL"><br/>
           <input name="name" type="text" value="Achievement Name" required><br/>
-          <input name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
+          <input id="clicksToUnlock" name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
           <div class="advanced">
           <input name="message" type="text" value="Unlock Message" required><br/>
           <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
@@ -158,21 +158,7 @@
         document.getElementById(appendTo).appendChild(cln);
       }
 
-      var clicks = 0;
-      var isClicked = false;
-
-
-      function pulse(){
-        clicks+=200;
-        $('#num-clicks').html(clicks);
-        $('#big-image').clearQueue();
-        $('#big-image').addClass("transform-active")
-                       .delay(115)
-                       .queue(function() {
-                           $(this).removeClass("transform-active");
-                           $(this).dequeue();
-                       });
-        }
+      
 
         /*
         if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")

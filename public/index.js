@@ -5,6 +5,36 @@ window.addEventListener('load', function() {
 	var passiveClicksPerSec = 0;
 	var manualClicks = 1;
 
+	var achievementList = [];
+	var unlockedAchievements = [];
+
+	var clicks = 0;
+      var isClicked = false;
+
+
+      function pulse(){
+
+          for(a in achievementList) {
+          	if(clicks == a.clicksToUnlock && !unlockedAchievements.includes(a.name)) {
+          		var dataImage = localStorage.getItem(name);
+				console.log(dataImage);
+    			$('#testImg').attr('src', dataImage);
+          		unlockedAchievements.push(a.name);
+          	}
+         }
+
+        
+        clicks+=200;
+        $('#num-clicks').html(clicks);
+        $('#big-image').clearQueue();
+        $('#big-image').addClass("transform-active")
+                       .delay(115)
+                       .queue(function() {
+                           $(this).removeClass("transform-active");
+                           $(this).dequeue();
+                       });
+        }
+
 	$('#playButton').on('click', function(e) {
 
 		 e.preventDefault();
@@ -23,7 +53,10 @@ window.addEventListener('load', function() {
 			data: data,
 			processData: false,
 			success: function (res) {
-				console.log(res);
+				//console.log(res);
+				achievementList = res['achievements'];
+				console.log("WOO!");
+				console.log(achievementList);
 
 				var reader = new FileReader();
 
