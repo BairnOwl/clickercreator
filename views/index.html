@@ -61,7 +61,7 @@
                     
                       Changes Big Image to:
                       <label class="fileContainer" style="max-height: 100px">
-                      <img src="defaultclick.png" style="height:100px;width:100px;" />
+                      <img src="defaultclick.png" class="new-big-img" style="height:100px;width:100px;" />
                       <input name="newBigImage" type="file" value="" onchange="showimg(this)" >
                       </label>
                       <input name="newBigImageURL" hidden type="text" value="" value="Click Image URL" >
@@ -209,7 +209,6 @@
       }
 
     function updatebigimg(caller){
-
         for (var i = 0; i < caller.files.length; i++) {  
           var file = caller.files[i];
           var img = document.createElement("img");
@@ -225,7 +224,7 @@
   // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
             $('#' + element).clone(true, true).appendTo('#' + appendTo);
-            
+
       }
     </script>
   </body>

@@ -1,0 +1,229 @@
+  <!doctype html>
+<html lang="en">
+<head>
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/cloud.css">
+<link rel="stylesheet" href="css/style.css">
+<title>Clicker Creator: Make your own clicker game!</title>
+
+</head>
+<body>
+<div class="upper-gradient"></div>
+<div class="lower-gradient"></div>
+<form class="container" method="post" id="gameForm">
+<div class="row" id="clouds">
+<div class="col-12">
+<div class="cloud x1"></div>
+<!-- Time for multiple clouds to dance around -->
+<div class="cloud x2"></div>
+<div class="cloud x3"></div>
+<div class="cloud x4"></div>
+<div class="cloud x5"></div>
+</div>
+</div>
+
+<input type="button" id="toggleModeButton" class="toggleMode" onclick="toggleMode()" value="Switch Mode">
+<!-- Header -->
+<div class="row" id="header">
+<div class="col">
+<input name="game[gameTitle]" class="game-title" type="text" value="Demo Clicker: Hatch Pinko!"/><br/>
+</div>
+</div>
+<!-- Main Content -->
+<div class="row">
+<!-- Achievements / Progress -->
+<div id="achievements" class="col-lg-4 col-md-6 col-12">
+<input name="game[achievementsTitle]" class="title" type="text" value="Achievements"/>
+<div id="achievementList" class="scroll" >
+<!-- an individual achievement -->
+<fieldset class="achievement" id="achievement">
+<div class="row no-gutters" >
+<div class="col-12 col-lg-3">
+<label class="fileContainer" >
+<img src="guinea.png" />
+<input name="achievementimage" type="file" value="" onchange="showimg(this)" >
+</label>
+</div>
+<div class="col-12 col-lg-9" >
+<div class=" item-box">
+<input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL">
+<input class="item-title" name="name" type="text" value="The Golden Egg" >
+<textarea onchange="$(this).next().attr('value',this.value);" class="item-description">The Egg is your Achievement. The Egg is your gift.</textarea>
+<input class="item-description" hidden name="message" type="text" value="Unlock Message" >
+<div class="advanced">
+Clicks to Unlock:
+<input class="clickstounlock" name="clicksToUnlock" type="number" value="10" ><br/>
+Changes Big Image to:
+<label class="fileContainer" style="max-height: 100px">
+<img src="defaultclick.png" style="height:100px;width:100px;" />
+<input name="newBigImage" type="file" value="" onchange="showimg(this)" >
+</label>
+<input name="newBigImageURL" hidden type="text" value="" value="Click Image URL" >
+</div>
+</div>
+</div>
+</div>
+</fieldset>
+</div>
+<input type="button" class="hidegame" value="Add Achievement" onclick="cloneElement('achievement','achievementList');">
+</div>
+<!-- Click Station -->
+<div class="col-lg-4 col-md-6 col-12">
+<div id="big-clicker-container">
+<div class="row no-gutters" >
+<div class="col-12 col-lg-6 right">
+<span class="fancy-font" id="num-clicks">0</span>
+</div>
+<div class="col-12 col-lg-6 left" >
+<input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="clicks"/>
+</div>
+</div>
+<img src="defaultclick.png" id="big-image" class="pointer">
+</div>
+<input name="game[defaultImageURL]" hidden type="text" placeholder="Default Image URL" value="" />
+<div class='item-box hidegame' style="text-align:center;
+background: url('white.png') rgba(180,180,180,.8);">
+<label class="fileContainer" style="padding: 10px 0px 0px;max-height: 100px">
+<span class="editable">Change Big Clicker Image</span>
+<input name="game[defaultImage]" class="hide" id="defaultImage" onchange="showimg(this);updatebigimg(this);" type="file" value="" />
+</label>
+</div>
+<input hidden name="game[overrideIcon]" type="file" value=""/>
+<input hidden name="game[overrideIconURL]" type="text" value="override Icon URL" value="" />
+<input hidden name="game[clickSFX]" type="file" value=""/>
+<!-- <img class="pointer" id="main-click-img" src="defaultclick.png" alt="Default Click Image"/> -->
+</div>
+<!-- Store -->
+<div class="col-lg-4 col-12">
+<input name="game[storeName]" class="title" type="text" value="Gift Shoppe"/><br/>
+<!-- a single item in a store -->
+<div id="store" class="scroll">
+<fieldset class="store-item" id="base-store-item">
+<div class="row no-gutters" >
+<div class="col-12 col-lg-3">
+<label class="fileContainer" >
+<img src="yarn.png" />
+<input name="storeimage" type="file" value="" onchange="showimg(this)" >
+</label>
+</div>
+<div class="col-12 col-lg-9" >
+<div class=" item-box">
+<input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
+<input class="item-title" name="title" type="text" value="Yarn Ball">
+<textarea width="80%" onchange="$(this).next().attr('value',this.value);" class="item-description">Pinko will accidentally pet himself 2x every second playing with this fun knitting accessory.</textarea>
+<input class="item-description" hidden name="description" type="text" value="Item Description" >
+
+<input class="item-cost" name="cost" onchange="$(this).next().attr('value','Buy for (' + abbrNum(this.value,1) + ' ' + $('#clicks').val()+ ')');" type="number" value="50" >
+
+<input type=button class="buyItem" value="Buy for (50 clicks)">
+<input class="itemQuantity" disabled type="number" value="0" >
+
+<div class="advanced">
+Passive Clicks/Second:<br>
+<input name="passiveClicks" class="passiveClicks" type="number" value="2" >
+<input name="passiveSecs" class="passiveSecs" type="number" hidden value="1"><br>
+Mouse Click Multiplier:<br/> <input name="manualClickMultiplier" class="manualClickMultiplier" type="number" value="1">
+</div>
+</div>
+</div>
+</div>
+</fieldset>
+</div>
+<input type="button" class="hidegame" value="Add Store Item" onclick="cloneElement('base-store-item','store');">
+</div>
+</div>
+<input hidden type="submit" value="Submit" id="playButton">
+</div>
+</form>
+
+<form style="display:none;" class="container" method="post" id="loadGameForm">
+<input type="text" name="inputID" placeholder="Game ID" id="inputID">
+<input type="submit" value="Load Game" id="loadGame">
+</form>
+
+<!-- <button id="testButton">
+Test that local storage is working
+</button> -->
+
+<script src="index.js"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+function showimg(caller){
+
+for (var i = 0; i < caller.files.length; i++) {
+var file = caller.files[i];
+var img = document.createElement("img");
+var reader = new FileReader();
+reader.onloadend = function() {
+img.src = reader.result;
+$(caller).prev("img").attr("src",img.src);
+}
+reader.readAsDataURL(file);
+}
+}
+
+function toggleMode(){
+console.log($('#gameForm').serialize());
+
+var data = $('#gameForm').serialize();
+
+$.ajax( {
+url: '/createGame',
+type: 'POST',
+dataType: 'json',
+data: data,
+processData: false,
+success: function (res) {
+//console.log(res);
+achievementList = res['achievements'];
+console.log("WOO!");
+console.log(achievementList);
+
+var reader = new FileReader();
+
+reader.onload = function (e) {
+// console.log(reader.result + '->' + typeof reader.result)
+var defaultImage = reader.result;
+defaultImageId = res['game'][0]['gameId'];
+localStorage.setItem(defaultImageId, defaultImage);
+};
+
+reader.readAsDataURL($('#defaultImage')[0]['files'][0]);
+
+startGame(res);
+}
+
+});
+$('body').toggleClass('game');
+}
+
+function updatebigimg(caller){
+
+for (var i = 0; i < caller.files.length; i++) {
+var file = caller.files[i];
+var img = document.createElement("img");
+var reader = new FileReader();
+reader.onloadend = function() {
+img.src = reader.result;
+$("#big-image").attr("src",img.src);
+}
+reader.readAsDataURL(file);
+}
+}
+
+// appends a clone of element to the end of appendTo
+function cloneElement(element, appendTo){
+$('#' + element).clone(true, true).appendTo('#' + appendTo);
+}
+</script>
+</body>
+</html>

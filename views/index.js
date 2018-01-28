@@ -46,17 +46,21 @@ function abbrNum(number, decPlaces) {
 window.addEventListener('load', function() {
 
 
-
 function updateClicks(){
-  $.fn.reverse = [].reverse;
   $('#num-clicks').html(abbrNum(clicks,4));
-  $(".achievement" ).reverse().each(function( index ) {
+  $(".achievement" ).each(function( index ) {
     if (clicks > $(this).find('.clickstounlock').first().val()) {
       var bg =  $(this).find('.item-box').first();
       bg.css('background-color', '#eee8aa');
+      var img = $(this).find('.new-big-img').first(); // TODO: find out how to select the
+      $("#big-image").attr("src",img.attr('src'));            // class .new-big-img
       var got =  $(this).find('.item-title').first();
       var name = got.val();
-      $('#header .game-title').first().val("Achievement unlocked: " + name);
+      var saveVal = $('#header .game-title').first();
+      $('#header .game-title').first().val("Achievement unlocked: " + name).delay(2015)
+                       .queue(function() {
+                           $(this).val(saveVal);
+                       });;
       return; // prevent from same achievement
     }
 });
