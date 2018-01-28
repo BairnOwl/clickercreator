@@ -45,10 +45,20 @@ function abbrNum(number, decPlaces) {
 
 window.addEventListener('load', function() {
 
-function updateClicks(){
 
+
+function updateClicks(){
   $('#num-clicks').html(abbrNum(clicks,4));
-}
+  $(".achievement" ).each(function( index ) {
+    if (clicks > $(this).find('.clickstounlock').first().val()) {
+      var bg =  $(this).find('.item-box').first();
+      bg.css('background-color', 'yellow');
+      var got =  $(this).find('.item-title').first();
+      var name = got.val();
+      alert('You got the achievement' + name + "!");
+    }
+});
+  }
 
   window.setInterval(function() {
     if (passiveClicksPerSec > 0) {

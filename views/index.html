@@ -57,7 +57,7 @@
                     <input class="item-description" hidden  name="message" type="text" value="Unlock Message" >
                     <div class="advanced">
                       Clicks to Unlock:
-                      <input name="clicksToUnlock" type="number" value="10" ><br/>
+                      <input class="clickstounlock" name="clicksToUnlock" type="number" value="10" ><br/>
                     
                       Changes Big Image to:
                       <label class="fileContainer" style="max-height: 100px">
@@ -119,7 +119,7 @@
                     <textarea width="80%" onchange="$(this).next().attr('value',this.value);" class="item-description">Pinko will accidentally pet himself 2x every second playing with this fun knitting accessory.</textarea>
                     <input class="item-description" hidden name="description" type="text" value="Item Description" >
 
-                    <input class="item-cost" name="cost" onchange="$(this).next().attr('value','Buy for (' + abbrNum(this.value,1) + " " + $('#clicks').val()+ ')');" type="number" value="50" >
+                    <input class="item-cost" name="cost" onchange="$(this).next().attr('value','Buy for (' + abbrNum(this.value,1) + ' ' + $('#clicks').val()+ ')');" type="number" value="50" >
 
                     <input type=button class="buyItem" value="Buy for (50 clicks)">
                     <input class="itemQuantity" disabled type="number" value="0" >
