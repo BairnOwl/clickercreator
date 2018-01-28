@@ -1,35 +1,57 @@
-@import url('https://fonts.googleapis.com/css?family=Gorditas');
+@import url('https://fonts.googleapis.com/css?family=Patrick Hand|Patrick+Hand');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro');
 
 * {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-
 }
 
 body {
+
   background: url("../bg.png");
   background-size: cover;
   background-repeat: none;
   background-attachment: fixed;
 }
 
+
+.upper-gradient {
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top:0;
+  opacity: .5;
+}
+.lower-gradient {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 100%, rgba(0,0,0,0.65) 0%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,rgba(0,0,0,0) 100%, rgba(0,0,0,0.65) 0%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  bottom:0;
+  opacity: .5;
+}
+
 .fancy-font {
-  font-family: 'Gorditas', cursive;
+  font-family: 'Patrick Hand', cursive;
   color: white;  
   font-size: 1.5em;
   background: transparent;
-  text-shadow: 2px 2px 5px rgba(0,0,0,.4);
+  text-shadow: 2px 2px 5px rgba(0,0,0,.6);
 }
 
 h1, h2, h3, 
 input[type="text"].title, 
 input[type="text"].game-title {
-  font-family: 'Gorditas', cursive;
+  font-family: 'Patrick Hand', cursive;
   text-align: center;
   padding: 5px 0px;
   color: white;
-    text-shadow: 2px 2px 5px rgba(0,0,0,.2)
+    text-shadow: -1px -1px 1px rgba(0,0,0,.5)
 }
 
 input, textarea {
@@ -49,15 +71,30 @@ input[type=text]#clicks{
 
 
 input[type=text].title {
-  font-size: 1.75em;
-  text-align: center;
-  background-color: rgba(0,0,0,.2);
-  background-size: auto 100%;
+  font-size: 1.6em;
+    padding-left: 20px;
+    text-align: left;
+  background: url("../wood.png") rgba(0,0,0,.1);
+  box-shadow: 1px 1px 10px rgba(0,0,0,.6);
+  background-size: 80px;
   border-radius: 10px;
-  margin-bottom: 10px;
+  line-height: .95em;
+  color: rgba(255,255,255,.9);
+  margin-bottom: 5px;
   width: 100%;
+
 }
 
+
+input[type=button], button {
+  background: url("../white.png") rgba(0,0,0,.4);
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: 'Patrick Hand',cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+
+}
 
 input[type=text].game-title {
   font-size: 2.2em;
@@ -67,8 +104,10 @@ input[type=text].game-title {
   border-radius: 10px;
   margin-bottom: 0px;
   color: white;
+  font-family: 'Patrick Hand',cursive;
+  text-shadow: 2px 2px 5px rgba(0,0,0,.5);
   width: 100%;
-}
+  }
 
 .pointer {
    cursor: pointer;
@@ -85,7 +124,7 @@ img {
 }
 
 #big-image {
-  padding: 0px 50px 50px 50px;
+  padding: 0px 30px 30px 30px;
   transform-origin: center;
   width: 100%;
   transition: .115s all linear;
@@ -112,6 +151,7 @@ img {
 
 #big-image.transform-active {
   transform: scale(.9);
+
 }
 
 @-webkit-keyframes pulse {
@@ -130,13 +170,12 @@ img {
     overflow: hidden;
     display: inline-block;
     cursor: pointer;
-  min-height:100%;
-  min-width:100%;
 }
 
 .fileContainer img {
   min-height:100%;
   min-width:100%;
+  padding: 0px 7px 0px 0px;
   cursor: pointer;
   border: 1px dashed transparent;
 
@@ -156,9 +195,12 @@ img {
     cursor: pointer;
 }
 
-#achievementsList, #storeList {
-  flex-direction: row;
-  display: flex;
+
+#achievementList, #store {
+
+  overflow-y: scroll;
+  max-height: 300px;
+  padding-right: 10px;
 }
 
 #achievementList .advanced {
@@ -167,10 +209,27 @@ img {
 
 }
 
-
-input[type=button] {
-  cursor: pointer;
+.scroll {
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
+
+.scroll::-webkit-scrollbar {;
+  width: 10px;
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: url("../wood.png") rgba(0,0,0,.1);
+  border-radius: 3px;
+  background-size: 100px;
+
+}
+
 
 .add {
   height: 80px;
@@ -194,20 +253,28 @@ input[type=button] {
 /* Store */
 
 input[type="number"], input[type="text"], textarea {
-  font-family: 'Gorditas', cursive;
+  font-family: 'Patrick Hand', cursive;
   color: rgba(0,0,0,.8);
   background: none;
   padding:0px;
 }
 
 .item-box {
-  background: rgba(255,255,255,.6);
+  background: url("../white.png") rgba(255,255,255,.8);
   padding: 10px 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,.3);
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 .item-box .item-title {
-  font-size: 1.2em;
+  font-size: 1.3em;
+
+  line-height: .9em;
+}
+
+#game .advanced {
+  display: none;
 }
 
 
@@ -219,6 +286,7 @@ input[type="number"], input[type="text"], textarea {
   line-height: .975;
   resize: none;
 }
+
 
 .item-box input[type=number] {
   width:150px;

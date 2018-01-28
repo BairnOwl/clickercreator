@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/cloud.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Clicker Creator: Make your own clicker game!</title>
+
   </head>
   <body>
-    <form class="container-fluid" method="post" id="gameForm">
+    <div class="upper-gradient"></div>
+    <div class="lower-gradient"></div>
+    <form class="container" method="post" id="gameForm">
       <div class="row" id="clouds">
         <div class="col-12">
           <div class="cloud x1"></div>
@@ -33,7 +37,7 @@
         <!-- Achievements / Progress -->
         <div id="achievements" class="col-lg-4 col-md-6 col-12">
           <input name="game[achievementsTitle]" class="title" type="text" value="Achievements"/>
-          <div id="achievementList">
+          <div id="achievementList" class="scroll" >
             <!-- an individual achievement -->
             <fieldset class="achievement" id="achievement">
               <div class="row no-gutters" >
@@ -47,22 +51,24 @@
                   <div class=" item-box">
                     <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL">
                     <input class="item-title" name="name" type="text" value="Achievement Name" >
-                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Description goes Here!</textarea>
+                    <textarea onchange="$(this).next().attr('value',this.value);" class="item-descrption">Congradulations text goes Here!</textarea>
                     <input class="item-descrption" hidden="hidden" name="message" type="text" value="Unlock Message" >
-                    <input name="clicksToUnlock" type="number" value="10" > Clicks to Unlock<br/>
                     <div class="advanced">
-                      <input name="changesBigImage" value="0" type="checkbox" > Changes Click Image?<br/>
-                      <label class="fileContainer" >
-                      <img src="defaultclick.png" />
+                    <input name="clicksToUnlock" type="number" value="10" > Clicks to Unlock<br/>
+                    
+                      Changes Big Image to:<br/>
+                      <label class="fileContainer" style="max-height: 100px">
+                      <img src="defaultclick.png" style="height:100px;width:100px;" />
                       <input name="newBigImage" type="file" value="" onchange="showimg(this)" >
                       </label>
-                      <input name="newBigImageURL" type="text" value="" value="Click Image URL" >
+                      <input name="newBigImageURL" hidden type="text" value="" value="Click Image URL" >
                     </div>
                   </div>
                 </div>
               </div>
             </fieldset>
           </div>
+        <input type="button" value="Add Achievement" onclick="cloneElement('achievement','achievementList');">
         </div>
         <!-- Click Station -->
         <div class="col-lg-4 col-md-6 col-12">
@@ -87,9 +93,9 @@
         </div>
         <!-- Store -->
         <div class="col-lg-4 col-12">
-          <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
+          <input name="game[storeName]" class="title" type="text" value="Gift Shoppe"/><br/>
           <!-- a single item in a store -->
-          <div id="store">
+          <div id="store" class="scroll">
             <fieldset class="store-item" id="base-store-item">
               <div class="row no-gutters" >
                 <div class="col-12 col-lg-3">
@@ -106,7 +112,7 @@
                     <input class="item-descrption" hidden="hidden" name="description" type="text" value="Item Description" >
                     <input class="item-cost" name="cost" type="number" value="10" >Cost (in clicks)<br/>
 
-                    <button class="buyItem">Buy</button>
+                    <input type=button class="buyItem" value="Buy">
                     <input class="itemQuantity" disabled type="number" value="0" >
 
                     <div class="advanced">
@@ -121,13 +127,12 @@
         </div>
         <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
       </div>
-      <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
     </div>
     <input type="submit" value="Submit" id="playButton">
   </div>
 </form>
 
-<form class="container-fluid" method="post" id="loadGameForm">
+<form class="container" method="post" id="loadGameForm">
   <input type="text" name="inputID" placeholder="Game ID" id="inputID">
    <input type="submit" value="Load Game" id="loadGame">
 </form>

@@ -41,7 +41,7 @@ window.addEventListener('load', function() {
   var manualClicks = 1;
 
   var clicks = 0;
-    var isClicked = false;
+  var isClicked = false;
 
   window.setInterval(function() {
     if (passiveClicksPerSec > 0) {
@@ -93,20 +93,20 @@ window.addEventListener('load', function() {
       $('#testImg').attr('src', dataImage);
   });
 
-  $('.buyItem').on('click', function(e) {
-    e.preventDefault();
+
+$('.buyItem').click(purchase);
+
+function purchase(e) {
 
     var cost = $(this).prev().val();
     var quantity = $(this).next().val();
-
     $(this).next().val(parseInt(quantity) + 1);
 
     var advanced = $(this).next().next();
 
     addPassiveClicks(advanced.children('input.passiveClicks').val(), advanced.children('input.passiveSecs').val());
     multiplyManualClicks(advanced.children('input.manualClickMultiplier').val());
-  });
-
+  }
 
   $('#loadGame').on('click', function(e) {
     e.preventDefault();
@@ -142,6 +142,7 @@ window.addEventListener('load', function() {
     // for each achievement, append to achievements section
   }
 
+
   function addManualClicks(num) {
     manualClicks += num;
   }
@@ -160,7 +161,7 @@ window.addEventListener('load', function() {
 
       function pulse(){
         clicks += manualClicks;
-        $('#num-clicks').html(clicks);
+        $('#num-clicks').html(abbrNum(clicks,4));
         $('#big-image').clearQueue();
         $('#big-image').addClass("transform-active")
                        .delay(115)
@@ -188,11 +189,12 @@ window.addEventListener('load', function() {
         }
       }
 
-      var mode = "gamey";
+      var mode = "game";
       $(document).ready(function(){
         if (mode == "game") {
         $("body").attr("id","game");
-          $("#gameForm :input").prop("disabled", true);
+
+          //$("#gameForm :input").prop("disabled", true);
         }
     });
 
