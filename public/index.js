@@ -60,6 +60,29 @@ window.addEventListener('load', function() {
 	});
 
 
+	$('#loadGame').on('click', function(e) {
+		e.preventDefault();
+		
+		var data = $('#loadGameForm').serialize();
+		console.log("OOOH");
+		console.log(data);
+
+		$.ajax( {
+			url: '/loadGame',
+			type: 'POST',
+			dataType: 'json',
+			data: data,
+			processData: false,
+			success: function (res) {
+				console.log(res);
+
+			    startGame(res);
+			}
+
+		});
+	});
+
+
 
 	function startGame(data) {
 		// $('#gameForm').hide();

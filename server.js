@@ -105,6 +105,39 @@ app.get('/', function(request, response) {
 	}
 */
 
+app.post('/loadGame', function(req, result) {
+	console.log(req.body);
+	var gameID = parseInt(req.body['inputID']);
+	if(!isNaN(gameID)) {
+			// SEND BACK TO FRONT END:
+	sql = 'SELECT * FROM Game WHERE gameID = ' + gameID;
+	console.log(gameID);
+ 	var ret = {};
+ 	conn.query(sql, function(err, res) {
+        game = res.rows;
+   
+        ret['game'] = game;
+
+        sql = 'SELECT * FROM Achievements WHERE gameID = ' + gameID;
+	 	conn.query(sql, function(err, res) {
+	        achievements = res.rows;
+	        
+	        ret['achievements'] = achievements;
+
+	        sql = 'SELECT * FROM Store WHERE gameID = ' + gameID;
+		 	conn.query(sql, function(err, res) {
+		        store = res.rows;
+		        ret['store'] = store;
+
+		        console.log(ret);
+		    	result.json(ret);
+		    }); 
+		    
+	    }); 
+    });
+	}
+
+});
 
 app.post('/createGame', function(req, result) {
 
