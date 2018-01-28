@@ -77,7 +77,7 @@
           <input id="clicks" class="fancy-font" id="" name="game[clickName]" type="text" value="clicks"/>
         </div>
       </div>
-        <img src="defaultclick.png" onmousedown="pulse();" id="big-image" class="pointer">
+        <img src="defaultclick.png" id="mainImage" id="big-image" class="pointer">
       </div>
 
       <input name="game[defaultImageURL]" type="text" placeholder="Default Image URL" value="" required/> <br/>
@@ -117,8 +117,8 @@
             
             <div class="advanced">
               <input name="autoClick" value="0" type="checkbox" required> Auto Click
-              <input name="passiveSecs" type="number" value="10" required> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
-              <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more 
+              <input name="passiveClicks" class="passiveClicks" type="number" value="10" required> times every <input name="passiveSecs" class="passiveSecs type="text" value="5"> seconds <br/> 
+              <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" class="manualClickMultiplier" type="text" value="1.5"> times more 
               </div>
             </div>
 
@@ -151,54 +151,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
 
-      // appends a clone of element to the end of appendTo
-      function cloneElement(element, appendTo){
-        var elmnt = document.getElementById(element);
-        var cln = elmnt.cloneNode(true);
-        document.getElementById(appendTo).appendChild(cln);
-      }
-
-      var clicks = 0;
-      var isClicked = false;
-
-
-      function pulse(){
-        clicks+=200;
-        $('#num-clicks').html(clicks);
-        $('#big-image').clearQueue();
-        $('#big-image').addClass("transform-active")
-                       .delay(115)
-                       .queue(function() {
-                           $(this).removeClass("transform-active");
-                           $(this).dequeue();
-                       });
-        }
-
-        /*
-        if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")
-          document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
-        else
-          document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
-      function showimg(caller){
-        for (var i = 0; i < caller.files.length; i++) {  
-          var file = caller.files[i];
-          var img = document.createElement("img");
-          var reader = new FileReader();
-          reader.onloadend = function() {
-               img.src = reader.result;
-               $(caller).prev("img").attr("src",img.src);
-          }
-          reader.readAsDataURL(file);
-        }
-      }
-      
-      var mode = "gamey";
-      $(document).ready(function(){
-        if (mode == "game") {
-        $("body").attr("id","game");
-          $("#gameForm :input").prop("disabled", true);
-        }
-    });
+    
     </script>
   </body>
 </html>
