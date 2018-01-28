@@ -50,7 +50,7 @@
         </label>
           <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL"><br/>
           <input name="name" type="text" value="Achievement Name" required><br/>
-          <input name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
+          <input id="clicksToUnlock" name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
           <div class="advanced">
           <input name="message" type="text" value="Unlock Message" required><br/>
           <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
@@ -151,11 +151,40 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
 
+      // appends a clone of element to the end of appendTo
       function cloneElement(element, appendTo){
         var elmnt = document.getElementById(element);
         var cln = elmnt.cloneNode(true);
         document.getElementById(appendTo).appendChild(cln);
       }
+
+      
+
+        /*
+        if (document.getElementById("big-image").style.WebkitAnimationPlayState == "paused")
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "running";
+        else
+          document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
+      function showimg(caller){
+        for (var i = 0; i < caller.files.length; i++) {  
+          var file = caller.files[i];
+          var img = document.createElement("img");
+          var reader = new FileReader();
+          reader.onloadend = function() {
+               img.src = reader.result;
+               $(caller).prev("img").attr("src",img.src);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
+      
+      var mode = "gamey";
+      $(document).ready(function(){
+        if (mode == "game") {
+        $("body").attr("id","game");
+          $("#gameForm :input").prop("disabled", true);
+        }
+    });
     </script>
   </body>
 </html>
