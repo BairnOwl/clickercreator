@@ -12,7 +12,7 @@
 
     <title>Clicker Creator: Make your own clicker game!</title>
   </head>
-  <body>
+  <body id="game">
 
 <form class="container-fluid" method="post" id="gameForm">
 
@@ -48,17 +48,17 @@
           <img src="guinea.png" />
           <input name="achievementimage" type="file" value="" onchange="showimg(this)" required>
         </label>
-          <input name="achievementimageURL" style="display:none;" type="text" value="" value="Achievement Image URL"><br/>
-          <input name="name" type="text" value="Achievement Name" required><br/>
-          <input name="clicksToUnlock" type="number" value="10" required> Clicks to Unlock<br/>
-          <div class="advanced">
-          <input name="message" type="text" value="Unlock Message" required><br/>
+        <div class="advanced">
+          <input name="achievementimageURL" style="display:none;" type="text" value="" placeholder="Achievement Image URL"><br/>
+          <input name="name" type="text" placeholder="Achievement Name" required><br/>
+          <input name="message" type="text" placeholder="Unlock Message" required><br/>
+          <input name="clicksToUnlock" type="number" placeholder="10" required> Clicks to Unlock<br/>
           <input name="changesBigImage" value="0" type="checkbox" required> Changes Click Image?<br/>
           <label class="fileContainer" >
             <img src="defaultclick.png" />
             <input name="newBigImage" type="file" value="" onchange="showimg(this)" required>
           </label>
-          <input name="newBigImageURL" type="text" value="" value="Click Image URL" required><br/>
+          <input name="newBigImageURL" type="text" value="" placeholder="Click Image URL" required><br/>
       </div>
       </fieldset> 
       </div>
@@ -79,11 +79,11 @@
       </div>
         <img src="defaultclick.png" onmousedown="pulse();" id="big-image" class="pointer">
       </div>
-      <input name="game[defaultImageURL]" type="text" value="Default Image URL" value="" required/> <br/>
+      <input name="game[defaultImageURL]" type="text" placeholder="Default Image URL" value="" required/> <br/>
       <input name="game[defaultImage]" type="file" value="" required/> <br/>
       <input name="game[clickOverride]" type="checkbox" value="1"/>Override default click icon?<br/>
       <input name="game[overrideIcon]" type="file" value=""/><br/>
-      <input name="game[overrideIconURL]" type="text" value="override Icon URL" value="" required/> <br/>
+      <input name="game[overrideIconURL]" type="text" placeholder="override Icon URL" value="" required/> <br/>
       <input name="game[clickSFX]" type="file" value=""/><br/>
 
 
@@ -96,30 +96,23 @@
       <input name="game[storeName]" class="title" type="text" value="Store Name"/><br/>
       <!-- a single item in a store -->
       <div id="store">
-      <div class="row">
-        <fieldset class="store-item" id="base-store-item">
-          <div class="col-6">
-          <label class="fileContainer" >
-            <img src="yarn.png" />
-            <input name="storeimage" type="file" value="" onchange="showimg(this)" required>
-          </label>
-          </div>
-          <div class="col-6">
-            <input name="storeimageURL" style="display: none;" type="text" value="Store Image URL" value="">
-              <input name="title" type="text" value="Item Name">
-              <input name="description" type="text" value="Item Description" required>
-              <input name="cost" type="text" value="10" required>Cost (in clicks)
-            
-            <div class="advanced">
-              <input name="autoClick" value="0" type="checkbox" required> Auto Click
-              <input name="passiveSecs" type="number" value="10" required> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
-              <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more 
-              </div>
-            </div>
+      <fieldset class="store-item" id="base-store-item">
+
+        <label class="fileContainer" >
+          <img src="yarn.png" />
+          <input name="storeimage" type="file" value="" onchange="showimg(this)" required>
+        </label>
+        <div class="store-item-advanced">
+        <input name="storeimageURL" style="display: none;" type="text" placeholder="Store Image URL" value=""><br/>
+        <input name="title" type="text" placeholder="Item Name"><br/>
+        <input name="description" type="text" placeholder="Item Description" required><br/>
+        <input name="cost" type="text" placeholder="10" required>Cost (in clicks)<br/>
+        <input name="autoClick" value="0" type="checkbox" required> Auto Click
+        <input name="passiveSecs" type="number" value="10" required> times every <input name="passiveSecs" type="text" value="5"> seconds <br/> 
+        <input name="manualClick" value="0" type="checkbox" required> Each Manual (Mouse) Click Worth <input name="manualClickMultiplier" type="text" value="1.5"> times more <br/>
         </div>
 
-
-        </fieldset> 
+      </fieldset> 
       </div>
       <input type="button" value="Add New Store Item" onclick="cloneElement('base-store-item','store');">
     </div>
@@ -165,25 +158,17 @@
         else
           document.getElementById("big-image").style.WebkitAnimationPlayState = "paused";*/
       function showimg(caller){
-        for (var i = 0; i < caller.files.length; i++) {  
-          var file = caller.files[i];
-          var img = document.createElement("img");
-          var reader = new FileReader();
-          reader.onloadend = function() {
-               img.src = reader.result;
-               $(caller).prev("img").attr("src",img.src);
-          }
-          reader.readAsDataURL(file);
+      for (var i = 0; i < caller.files.length; i++) {  
+        var file = caller.files[i];
+        var img = document.createElement("img");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+             $(caller).prev("img").attr("src",img.src);
         }
-      }
-
-      var mode = "game";
-      $(document).ready(function(){
-        if (mode == "game") {
-        $("body").attr("id","game");
-          $("#gameForm :input").prop("disabled", true);
-        }
-    });
+        reader.readAsDataURL(file);
+    }
+}
     </script>
   </body>
 </html>

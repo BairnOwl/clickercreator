@@ -22,7 +22,9 @@ body {
   text-shadow: 2px 2px 5px rgba(0,0,0,.4);
 }
 
-h1, h2, h3, .title, .game-title {
+h1, h2, h3, 
+input[type="text"].title, 
+input[type="text"].game-title {
   font-family: 'Gorditas', cursive;
   text-align: center;
   padding: 5px 0px;
@@ -40,12 +42,14 @@ input:hover {
   border: 1px dashed gray;
 }
 
-input#clicks{
+input[type=text]#clicks{
   position: absolute;
   padding: 5px 0px;
+  color:white;
 }
 
-.title {
+
+input[type=text].title {
   font-size: 1.75em;
   text-align: center;
   background-color: rgba(0,0,0,.2);
@@ -55,13 +59,15 @@ input#clicks{
   width: 100%;
 }
 
-.game-title {
+
+input[type=text].game-title {
   font-size: 2.2em;
   text-align: center;
   background: transparent;
   background-size: auto 100%;
   border-radius: 10px;
   margin-bottom: 0px;
+  color: white;
   width: 100%;
 }
 
@@ -130,7 +136,8 @@ img {
 }
 
 .fileContainer img {
-  width:100%;
+  min-height:100%;
+  min-width:100%;
   cursor: pointer;
   border: 1px dashed transparent;
 
@@ -140,12 +147,59 @@ img {
 
 }
 
-.fileContainer [type=file] {
+.fileContainer input[type=file] {
     display: block;
-    filter: alpha(opacity=0);
+    filter: alpha(opacity=0) ;
     opacity: 0;
     text-align: right;
     width: auto;
-    display: none;
+    display: none !important;
     cursor: pointer;
+}
+
+#achievementsList, #storeList {
+  flex-direction: row;
+  display: flex;
+}
+
+#achievementList .advanced {
+  display: inline-block;
+  flex-wrap: wrap;
+
+}
+
+.achievement {
+  display: inline-block;
+}
+
+input[type=button] {
+  cursor: pointer;
+}
+
+.add {
+  height: 80px;
+  width: 80px;
+  display: inline-block;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+
+.advanced {
+  display: inline-block;
+}
+
+#game .adcvanced {
+  display: none;
+}
+
+
+
+/* Store */
+
+input[type="number"], input[type="text"] {
+  font-family: 'Gorditas', cursive;
+  color: black;
+  background: none;
+
 }

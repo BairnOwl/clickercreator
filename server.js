@@ -118,6 +118,18 @@ app.post('/createGame', function(req, res) {
 	var clickOverride = req.body['game']['clickOverride'];
 	var overrideIcon = req.body['game']['overrideIcon'];
 	
+	
+	// Pick URL over file upload. 
+	var defaultImageURL = req.body['game']['defaultImageURL'];
+	if(defaultImageURL != 'undefined' || defaultImageURL != '') {
+		defaultImage = defaultImageURL;
+	}
+
+	var overrideIconURL = req.body['game']['overrideIconURL'];
+	if(overrideIconURL != 'undefined' || overrideIconURL != '') {
+		overrideIcon = overrideIconURL;
+	}
+
 	var clickSFX = "";
 	if (typeof clickSFX == 'undefined' || clickSFX == 'undefined') {
 		clickSFX = "";
@@ -134,9 +146,9 @@ app.post('/createGame', function(req, res) {
 	}
 
 	if (typeof overrideIcon == 'undefined') {
-		overrideIcon = 0;
+		overrideIcon = "";
 	} else {
-		overrideIcon = parseInt(overrideIcon);
+		overrideIcon = overrideIcon;
 	}
 
 
@@ -183,11 +195,16 @@ app.post('/createGame', function(req, res) {
 		var name = nameList;
 
 		var achievementimage = "";
-  //   	if (typeof achievementImageList == 'undefined') {
-		// 	achievementimage = "";
-		// } else {
-		// 	achievementimage = achievementImageList;
-		// }
+    	if (typeof achievementImageList == 'undefined') {
+			achievementimage = "";
+		} else {
+			achievementimage = achievementImageList;
+		}
+
+		var achievementimageURL = req.body['achievementimageURL'];
+		if(achievementimageURL != "" && achievementimageURL != 'undefined') {
+			achievementimage = achievementimageURL;
+		}
 
     	
     	var clicksToUnlock = 0;
@@ -198,18 +215,25 @@ app.post('/createGame', function(req, res) {
 		}
 
 
-    	var changesBigImage = 0;
+    	var changesBigImage = "";
 		if (typeof changesBigImageList == 'undefined') {
-			changesBigImage = 0;
+			changesBigImage = "";
 		} else {
-			changesBigImage = parseInt(changesBigImageList);
+			changesBigImage = changesBigImageList;
 		}
+
+
 
     	var newBigImage = "";
     	if (typeof newBigImageList == 'undefined') {
 			newBigImage = "";
 		} else {
 			newBigImage = newBigImageList;
+		}
+
+		var newBigImageURL = req.body['newBigImageURL'];
+		if(newBigImageURL != "" && newBigImage != 'undefined') {
+			newBigImage = newBigImageURL;
 		}
 
     	var message = messageList;
@@ -237,11 +261,16 @@ app.post('/createGame', function(req, res) {
     	var name = nameList[count];
 
 		var achievementimage = "";
-  //   	if (typeof achievementImageList == 'undefined') {
-		// 	achievementimage = "";
-		// } else {
-		// 	achievementimage = achievementImageList[count];
-		// }
+    	if (typeof achievementImageList == 'undefined') {
+			achievementimage = "";
+		} else {
+			achievementimage = achievementImageList[count];
+		}
+
+		var achievementimageURL = req.body['achievementimageURL'][count];
+		if(achievementimageURL != "" && achievementimageURL != 'undefined') {
+			achievementimage = achievementimageURL;
+		}
     	
     	var clicksToUnlock = 0;
     	if (typeof clicksToUnlockList == 'undefined') {
@@ -263,6 +292,11 @@ app.post('/createGame', function(req, res) {
 			newBigImage = "";
 		} else {
 			newBigImage = newBigImageList[count];
+		}
+
+		var newBigImageURL = req.body['newBigImageURL'][count];
+		if(newBigImageURL != "" && newBigImage != 'undefined') {
+			newBigImage = newBigImageURL;
 		}
 
     	var message = messageList[count];
@@ -429,7 +463,33 @@ app.post('/createGame', function(req, res) {
  	}
 	}
 
+	// SEND BACK TO FRONT END:
+	sql = 'SELECT * FROM Game WHERE gameID = ' + gameID;
+ 	var ret = "";
+ 	conn.query(sql, function(err, res) {
+        game = res.rows[0];
+        // console.log("WOOO!");
+        // console.log(game);
+        ret += game;
+    }).then(function() {
+    	console.log(ret);
+    });
 
+
+ 	sql = 'SELECT * FROM Achievements WHERE gameID = ' + gameID;
+ 	conn.query(sql, function(err, res) {
+        test = res.rows[0];
+        console.log(test);
+        ret += test;
+    }); 
+
+ 	sql = 'SELECT * FROM Store WHERE gameID = ' + gameID;
+ 	conn.query(sql, function(err, res) {
+        test = res.rows[0];
+        console.log(test);
+        ret += test;
+    }); 
+    console.log(ret);
     
     //response.render('room.html', {roomName: request.params.roomName, nickname: nickname});
 });
