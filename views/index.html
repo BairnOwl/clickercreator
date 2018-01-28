@@ -30,7 +30,7 @@
 <input name="game[gameTitle]" class="title" type="text" value="Cookie Clicker"/><br/>
         <img src="defaultclick.png" onclick="pulse();" id="big-image" class="pointer">
       </div>
-      <input name="game[defaultImage]" type="file" required/> <br/>
+      <input id="defaultImage" name="game[defaultImage]" type="file" required/> <br/>
       <span class="num-clicks">#</span> of <input name="game[clickName]" type="text" value="clicks"/><br/>
       <input name="game[clickOverride]" type="checkbox" value="clicks"/>Override default click icon?<br/>
       <input name="game[overrideIcon]" type="file" value="clicks"/><br/>
@@ -78,6 +78,12 @@
     <input type="submit" value="Submit" id="playButton">
   </div>
 </form>
+
+<img id="testImg">
+
+<button id="testButton">
+    Test that local storage is working
+</button>
 
     <script src="index.js"></script>
     <!-- Optional JavaScript -->

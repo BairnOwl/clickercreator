@@ -367,7 +367,6 @@ app.post('/createGame', function(req, res) {
  
      	console.log(sql);
      	q = conn.query(sql);
- 		itemID = itemID + 1;
 
 	} else {
 		lengthStore = titleList.length;
