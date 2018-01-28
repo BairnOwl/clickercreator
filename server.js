@@ -50,10 +50,11 @@ app.get('*', function(request, response) {
 
     var sql = 'SELECT count(achievementID) as numAchievement FROM Achievements';
     achievementID = conn.query(sql, function(err, res) {
+    	console.log("ACHIEVEMENTS ID:");
+   
         achievementID = res.rows[0]['numAchievement'];
+        console.log(achievementID);
     }); 
-    console.log("ACHIEVEMENTS ID:");
-    console.log(achievementID);
 
     var sql = 'SELECT count(itemID) as numStore FROM Store';
     itemID = conn.query(sql, function(err, res) {
@@ -198,7 +199,6 @@ app.post('/createGame', function(req, res) {
 			clicksToUnlock = parseInt(clicksToUnlockList);
 		}
 
-		console.log('clicks to unlock ' + clicksToUnlockList);
 
     	var changesBigImage = 0;
 		if (typeof changesBigImageList == 'undefined') {
@@ -215,7 +215,8 @@ app.post('/createGame', function(req, res) {
 		}
 
     	var message = messageList;
-    	var achievementID = achievementID;
+
+    	console.log('achievementID ' + achievementID);
 
 		sql = 'INSERT INTO Achievements (gameID, name, achievementimage, clicksToUnlock, changesBigImage, newBigImage, message, achievementID) VALUES (\'' 
          + gameID + '\', \'' 
