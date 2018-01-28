@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Gorditas');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro');
 
 * {
   font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
 
 }
 
@@ -13,7 +14,15 @@ body {
   background-attachment: fixed;
 }
 
-h1, h2, h3, .title {
+.fancy-font {
+  font-family: 'Gorditas', cursive;
+  color: white;  
+  font-size: 1.5em;
+  background: transparent;
+  text-shadow: 2px 2px 5px rgba(0,0,0,.4);
+}
+
+h1, h2, h3, .title, .game-title {
   font-family: 'Gorditas', cursive;
   text-align: center;
   padding: 10px 0px;
@@ -26,6 +35,10 @@ input {
   max-width: 100%;
 }
 
+input#clicks{
+  position: absolute;
+}
+
 .title {
   font-size: 1.75em;
   text-align: center;
@@ -33,11 +46,23 @@ input {
   background-size: auto 100%;
   border: none;
   border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.game-title {
+  font-size: 2.2em;
+  text-align: center;
+  background: transparent;
+  background-size: auto 100%;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 0px;
   width: 100%;
 }
 
 .pointer {
-  cursor: pointer;
+   cursor: pointer;
 }
 
 img {
@@ -45,19 +70,35 @@ img {
 }
 
 #big-clicker-container {
-
   background-size: 100% 100%;
   text-align: center;
   padding-bottom: 1.7em;
 }
 
 #big-image {
-  padding: 50px;
-  margin: auto;
+  padding: 0px 50px 50px 50px;
   transform-origin: center;
   width: 100%;
   transition: .115s all linear;
   transform: scale(1);
+}
+
+.two {
+  text-align: left;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+#num-clicks {
+  display: inline-block;
+  padding: 0px 10px;
+  font-size:30px;
 }
 
 #big-image.transform-active {
