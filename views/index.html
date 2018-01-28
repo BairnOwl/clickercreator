@@ -128,6 +128,11 @@
   </div>
 </form>
 
+<form class="container-fluid" method="post" id="loadGameForm">
+  <input type="text" name="inputID" placeholder="Game ID" id="inputID">
+   <input type="submit" value="Load Game" id="loadGame">
+</form>
+
 <!-- <button id="testButton">
     Test that local storage is working
 </button> -->
@@ -182,7 +187,7 @@
         }
       }
 
-      var mode = "game";
+      var mode = "WOO";
       $(document).ready(function(){
         if (mode == "game") {
         $("body").attr("id","game");
