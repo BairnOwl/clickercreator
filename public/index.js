@@ -48,10 +48,21 @@ window.addEventListener('load', function() {
     	$('#testImg').attr('src', dataImage);
 	});
 
+	$('.buyItem').on('click', function(e) {
+		e.preventDefault();
+
+		var cost = $(this).prev().val();
+		var quantity = $(this).next().val();
+
+		$(this).next().val(parseInt(quantity) + 1);
+
+		var advanced = $(this).next().next();
+	});
+
 
 
 	function startGame(data) {
-		$('#gameForm').hide();
+		// $('#gameForm').hide();
 
 		// for each item in store, append to store section
 

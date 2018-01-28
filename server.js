@@ -42,7 +42,7 @@ var gameID = 0;
 var achievementID = 0;
 var itemID = 0;
 
-app.get('*', function(request, response) {
+app.get('/', function(request, response) {
     response.render('index.html');
     var sql = 'SELECT count(gameID) as numGames FROM Game';
     gameID = conn.query(sql, function(err, res) {
